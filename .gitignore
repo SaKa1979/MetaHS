@@ -1,0 +1,5 @@
+.stack-work/
+src/projects/output/*
+src/projects/report/*
+src/projects/input/*
+!src/projects/input/example
