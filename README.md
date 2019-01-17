@@ -9,4 +9,8 @@ graphviz            2999.19.0.0
 fgl					5.5.3.1		ghc-pkg unregister fgl-5.6.0.0
 blaze-html			0.9.0.1
 
-#by hhrf.vos
+Description:
+MetaHs is a library which provides functions to analyse Haskell source code.
+
+
+Usage:

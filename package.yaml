@@ -1,6 +1,6 @@
 name:                metahs
 version:             0.1.0.0
-github:              "githubuser/metahs"
+github:           "https://SaKa1979@bitbucket.org/SaKa1979/metahs"
 license:             BSD3
 author:              "Henrie Vos, Sander Kamps"
 maintainer:          "sanderkamps79@gmail.com"
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/metahs#readme>
+description:         Please see the README on bitbucket at https://bitbucket.org/SaKa1979/metahs/src/master/README
 
 dependencies:
 - base >= 4.7 && < 5
@@ -36,25 +36,3 @@ dependencies:
 
 library:
   source-dirs: src
-
-executables:
-  metahs-exe:
-    main:                Main.hs
-    source-dirs:         src
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - metahs
-
-tests:
-  metahs-test:
-    main:                Spec.hs
-    source-dirs:         test
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - metahs

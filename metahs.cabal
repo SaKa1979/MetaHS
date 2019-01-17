@@ -1,32 +1,32 @@
--- This file has been generated from package.yaml by hpack version 0.28.2.
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a7a9e4c7a1b8f82eb79a0807ae696c73e7be1dc9926523ae5c9dc9a921628de9
+-- hash: 82efe78dbc364d50db01f11e9478123bf32ad196148ab59034fe286fa1e4591e
 
 name:           metahs
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/metahs#readme>
-homepage:       https://github.com/githubuser/metahs#readme
-bug-reports:    https://github.com/githubuser/metahs/issues
+description:    Please see the README on bitbucket at https://bitbucket.org/SaKa1979/metahs/src/master/README
+homepage:       https://github.com/https://SaKa1979@bitbucket.org/SaKa1979/metahs#readme
+bug-reports:    https://github.com/https://SaKa1979@bitbucket.org/SaKa1979/metahs/issues
 author:         Henrie Vos, Sander Kamps
 maintainer:     sanderkamps79@gmail.com
 copyright:      2018 Sander Kamps
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
-cabal-version:  >= 1.10
 extra-source-files:
-    ChangeLog.md
     README.md
+    ChangeLog.md
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/metahs
+  location: https://github.com/https://SaKa1979@bitbucket.org/SaKa1979/metahs
 
 library
   exposed-modules:
-      Main
       MetaHS.DataModel.Extractor.Module.Contains
       MetaHS.DataModel.Extractor.Module.Source
       MetaHS.DataModel.Extractor.Module.Uses
@@ -52,9 +52,6 @@ library
       MetaHS.EDSL.MetaModel
       MetaHS.EDSL.Utils
       MetaHS.Extensions.LCOM
-      Report
-      Test
-      Types
   other-modules:
       Paths_metahs
   hs-source-dirs:
@@ -68,83 +65,6 @@ library
     , filepath
     , graphviz
     , haskell-src-exts
-    , pretty
-    , split
-    , syb
-    , text
-    , time
-  default-language: Haskell2010
-
-executable metahs-exe
-  main-is: Main.hs
-  other-modules:
-      MetaHS.DataModel.Extractor.Module.Contains
-      MetaHS.DataModel.Extractor.Module.Source
-      MetaHS.DataModel.Extractor.Module.Uses
-      MetaHS.DataModel.Extractor.Program.Contains
-      MetaHS.DataModel.MetaModel
-      MetaHS.DataModel.Utils
-      MetaHS.DataModel.Utils.File.FileUtils
-      MetaHS.DataModel.Utils.Find
-      MetaHS.DataModel.Utils.Language.Haskell.Exts.SrcLoc
-      MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.ConDecl
-      MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Decl
-      MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.DeclHead
-      MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Module
-      MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name
-      MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.QName
-      MetaHS.DataModel.Utils.Name
-      MetaHS.DataModel.Utils.NameResolution
-      MetaHS.EDSL
-      MetaHS.EDSL.Graph
-      MetaHS.EDSL.Graph.Types
-      MetaHS.EDSL.Graph.UsesGraph
-      MetaHS.EDSL.Graph.Utils
-      MetaHS.EDSL.MetaModel
-      MetaHS.EDSL.Utils
-      MetaHS.Extensions.LCOM
-      Report
-      Test
-      Types
-      Paths_metahs
-  hs-source-dirs:
-      src
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , blaze-html
-    , containers
-    , directory
-    , fgl
-    , filepath
-    , graphviz
-    , haskell-src-exts
-    , metahs
-    , pretty
-    , split
-    , syb
-    , text
-    , time
-  default-language: Haskell2010
-
-test-suite metahs-test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-      Paths_metahs
-  hs-source-dirs:
-      test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , blaze-html
-    , containers
-    , directory
-    , fgl
-    , filepath
-    , graphviz
-    , haskell-src-exts
-    , metahs
     , pretty
     , split
     , syb
