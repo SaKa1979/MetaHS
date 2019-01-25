@@ -38,13 +38,12 @@ lcomGraph :: MetaModel                    -- ^ The meta-model.
           -> String                       -- ^ The prefix for the links in the generated SVG images to the correct HTML editor for display the source code. Should probably become a hard link if a web server is used.
           -> (Int, GraphType, ParamsType) -- ^ The calculated LCOM metric value and the generated Graph and default parameters.
 lcomGraph metaModel moduleElement directed editorLink = do
-    let (graph, params) = internalUses metaModel moduleElement
-                                       directed editorLink
+    let (graph, params) = internalUses metaModel moduleElement directed editorLink
     (noComponents graph, graph, params)
 
 
 -- | MetaModel key used for the LCOM relation.
-keyLcom :: String
+keyLcom :: RelationKey
 keyLcom = "LCOM"
 
 
@@ -56,6 +55,6 @@ lcomAggregator :: MetaModel
                -> MetaModel
 lcomAggregator mm = setRelation keyLcom r mm
   where
-    r = foldr f Set.empty $ modules mm                                          -- r = relation
+    r = foldr f Set.empty $ getModules mm                                       -- r = relation
     f m s = Set.insert (m,lv m) s                                               -- f = foldr function
     lv m = IntValue $ lcom mm m                                                 -- lv = LCOM value

@@ -24,7 +24,6 @@ import MetaHS.EDSL.MetaModel
 import MetaHS.EDSL.Graph.Types
 import MetaHS.EDSL.Utils
 
-
 -- | Generates the internal uses graph for the specificed module and returns
 --   the associated default GraphvizParams.
 internalUses :: MetaModel               -- ^ The meta-model.

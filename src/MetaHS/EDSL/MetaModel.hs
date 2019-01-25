@@ -14,8 +14,8 @@ module MetaHS.EDSL.MetaModel
     , writeMetaModelPretty
     , pretty
     , numberOfItems
-    , programs
-    , modules
+    , getPrograms
+    , getModules
     , elementContains
     , programContains
     , moduleContains
@@ -25,6 +25,7 @@ module MetaHS.EDSL.MetaModel
     , setRelation
     , domain
     , range
+    , RelationKey
     ) where
 import qualified Data.Set as Set
 import qualified Data.Map.Strict as Map
@@ -37,14 +38,15 @@ import qualified MetaHS.DataModel.Extractor.Module.Source as ModuleSource
 import MetaHS.DataModel.Utils.File.FileUtils
 import Text.PrettyPrint
 
+type RelationKey = String
 
-keyContains :: String
+keyContains :: RelationKey
 keyContains = "_contains"
 
-keyUses :: String
+keyUses :: RelationKey
 keyUses = "_uses"
 
-keySource :: String
+keySource :: RelationKey
 keySource = "_source"
 
 
@@ -109,9 +111,9 @@ numberOfItems mm = Map.foldr f 0 $ MetaModel.getMetaModelImpl mm
 
 
 -- | Returns a list of Programs contained in the metamodel.
-programs :: MetaModel.MetaModel -- ^ The metamodel.
+getPrograms :: MetaModel.MetaModel -- ^ The metamodel.
          -> [MetaModel.Element] -- ^ The Programs contained in the metamodel.
-programs mm = Set.elems $ Set.foldr f Set.empty pcs
+getPrograms mm = Set.elems $ Set.foldr f Set.empty pcs
   where
     f (p@MetaModel.Program{},_) es = Set.insert p es
     f _ es = es
@@ -119,9 +121,9 @@ programs mm = Set.elems $ Set.foldr f Set.empty pcs
 
 
 -- | Returns a list of Modules contained in the metamodel.
-modules :: MetaModel.MetaModel  -- ^ The metamodel.
-        -> [MetaModel.Element]  -- ^ The Modules contained by the specified Program.
-modules mm = Set.elems $ Set.foldr f Set.empty pcs
+getModules :: MetaModel.MetaModel  -- ^ The metamodel.
+                            -> [MetaModel.Element]  -- ^ The Modules contained by the specified Program.
+getModules mm = Set.elems $ Set.foldr f Set.empty pcs
   where
     f (p,c) ms
         | isProgram p && isModule c = Set.insert c ms

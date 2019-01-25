@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 82efe78dbc364d50db01f11e9478123bf32ad196148ab59034fe286fa1e4591e
+-- hash: 0ce3400441f896e415427690917c1de609d2bf32062395aeec34a0ce46b2160b
 
 name:           metahs
 version:        0.1.0.0
@@ -52,13 +52,13 @@ library
       MetaHS.EDSL.MetaModel
       MetaHS.EDSL.Utils
       MetaHS.Extensions.LCOM
+      MetaHS.Extensions.MacroLevelAggregation.Average
   other-modules:
       Paths_metahs
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
-    , blaze-html
     , containers
     , directory
     , fgl
@@ -69,5 +69,4 @@ library
     , split
     , syb
     , text
-    , time
   default-language: Haskell2010

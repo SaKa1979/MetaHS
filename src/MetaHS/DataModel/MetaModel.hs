@@ -12,6 +12,7 @@ MetaHS metamodel
 
 module MetaHS.DataModel.MetaModel
     ( Element(..)
+    , Pair
     , Relation
     , MetaModel(..)
     , pPrint
@@ -81,7 +82,11 @@ data Element
     -- ^ Contains a generic Int value.
     deriving (Show, Read, Eq, Ord)
 
--- | A relation is defined as a set of (Element,Element) pairs.
+-- | A Pair is defined as a tuple of Elements
+type Pair = (Element,Element)
+
+-- | A relation is defined as a set of Pair types.
+--   E.g., _contains, _source, _uses, LCOM
 type Relation = Set.Set (Element,Element)
 
 -- | A metamodel is implemented as a mapping between a String and Relation.

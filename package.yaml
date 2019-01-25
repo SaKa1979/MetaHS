@@ -24,15 +24,13 @@ dependencies:
 - containers
 - pretty
 - graphviz
+- filepath
 - fgl
-- blaze-html
 - haskell-src-exts
 - directory
-- filepath
 - syb
 - split
 - text
-- time
 
 library:
   source-dirs: src
