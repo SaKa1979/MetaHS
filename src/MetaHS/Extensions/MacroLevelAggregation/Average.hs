@@ -5,7 +5,7 @@ import MetaHS.Extensions.MacroLevelAggregation.Utils
 import qualified MetaHS.DataModel.MetaModel as MetaModel
 import MetaHS.EDSL.MetaModel
 
--- | Calculates the average for the supplied metric Relation Key
+-- | Calculate the average of the metric values associated with the supplied metric Relation key
 average :: RelationKey          -- ^ The MetaModel Relation Key (E.g., LCOM).
         -> MetaModel.MetaModel  -- ^ The MetaModel Containing the associated key.
         -> Double               -- ^ The average

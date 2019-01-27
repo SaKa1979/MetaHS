@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: acad09249fc75eae526ca278adebaf75da45712d18bb9bc7650f749f9ded88e0
+-- hash: 6f833fe99594ad0514961eccc49fb26f4283e5fe2087ab3f6f322f56c5d2d253
 
 name:           metahs
 version:        0.1.0.0
@@ -54,6 +54,7 @@ library
       MetaHS.Extensions.LCOM
       MetaHS.Extensions.MacroLevelAggregation.Average
       MetaHS.Extensions.MacroLevelAggregation.Distribution
+      MetaHS.Extensions.MacroLevelAggregation.GiniCoefficient
       MetaHS.Extensions.MacroLevelAggregation.Utils
   other-modules:
       Paths_metahs
