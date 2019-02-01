@@ -20,7 +20,7 @@ giniCoefficient key mm = gini ordered_list
 -- | Calculates the Gini-coefficient of the elements contained in the supplied list
 gini :: [Int]  -- ^ ordered list
      -> Double -- ^ The Gini-coefficient
-gini xs = fromIntegral (deltaSum xs) / fromIntegral (last $ xs_accum xs) / fromIntegral (length xs)
+gini xs = fromIntegral (deltaSum xs) / fromIntegral (last $ xsAccum xs) / fromIntegral (length xs)
 
 -- | Sums up halve of all delta's of each consecutive element in a list. (x_i - x_i-1)
 -- | This means that from a supplied list, the delta of each member with respect to
@@ -32,11 +32,11 @@ deltaSum :: [Int] -- ^ An ordered list
 deltaSum xs = fromIntegral delta_cum
   where
   delta_cum = sum deltas
-  deltas = zipWith3 (\idx x x_accum -> idx * x - x_accum) indices xs $ xs_accum xs
+  deltas = zipWith3 (\idx x x_accum -> idx * x - x_accum) indices xs $ xsAccum xs
   xs_ord = List.sort xs
   indices = [0..length xs - 1]
 
 -- | Every element in the resulting list is an accumulation of all it's predecessors.
-xs_accum :: [Int] -- ^ An ordered list
+xsAccum :: [Int] -- ^ An ordered list
          -> [Int] -- ^ Accumulated values
-xs_accum xs = scanl (+) 0 xs
+xsAccum = scanl (+) 0
