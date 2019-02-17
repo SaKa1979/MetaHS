@@ -17,18 +17,18 @@ import System.FilePath
 import Control.Monad
 import Data.List (partition)
 import Language.Haskell.Exts
-
+import Debug.Trace
 -- | Flattens the hierarchy of a directory to a list of files.
 filesInHierarchy :: FilePath      -- ^ The directory hierarchy to analyze.
                  -> IO [FilePath] -- ^ The files found in the directory hierarchy.
 filesInHierarchy dir = do
     rawDirList <- listDirectory dir
-    --dirList <- mapM makeAbsolute $ map (dir </>) rawDirList
-    let dirList = map (dir </>) rawDirList
+    let dirList = map (dir </>) $ rawDirList
     files <- filterM doesFileExist dirList
+    let pureHaskellModuleFiles = filter (\p -> takeExtension p == ".hs") dirList
     subDirs <- filterM doesDirectoryExist dirList
     subDirFiles <- mapM filesInHierarchy subDirs
-    return $ files ++ concat subDirFiles
+    return $ pureHaskellModuleFiles ++ concat subDirFiles
 
 -- | Attempts to extract modules for each file in the directory hierarchy
 --   The returned tuple contains the successfully extracted modules and the
