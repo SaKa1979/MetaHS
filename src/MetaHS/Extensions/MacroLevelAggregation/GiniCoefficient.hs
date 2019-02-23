@@ -20,7 +20,9 @@ giniCoefficient key mm = gini ordered_list
 -- | Calculates the Gini-coefficient of the elements contained in the supplied list
 gini :: [Int]  -- ^ ordered list
      -> Double -- ^ The Gini-coefficient
-gini xs = fromIntegral (deltaSum xs) / fromIntegral (last $ xsAccum xs) / fromIntegral (length xs)
+gini xs | null xs = 0.0
+        | length xs == 1 = 0.0
+        | otherwise = fromIntegral (deltaSum xs) / fromIntegral (last $ xsAccum xs) / fromIntegral (length xs)
 
 -- | Sums up halve of all delta's of each consecutive element in a list. (x_i - x_i-1)
 -- | This means that from a supplied list, the delta of each member with respect to
