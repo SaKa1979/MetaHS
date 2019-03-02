@@ -12,7 +12,7 @@ module MetaHS.DataModel.Extractor.Module.Source
     ) where
 
 import Data.Maybe (fromMaybe)
-import Data.Set (fromList)
+import Data.Set (fromList, empty)
 import Language.Haskell.Exts
 import qualified MetaHS.DataModel.MetaModel as MetaModel
 import MetaHS.DataModel.Utils
@@ -33,17 +33,17 @@ import Debug.Trace
 source :: Module SrcSpanInfo  -- ^ The Module to analyze.
        -> MetaModel.Relation  -- ^ The resulting MetaModel.Relation items.
 --source m = fromList $ mlr : concat [locationDecl mn d | d <- ms]
-source m = fromList $ mlr : mlhr ++ mli ++ mle ++ dlr
-  where
-    mlr = locationModule mn m                                                   -- mlr = Module-Location Relation
-    mlhr = locationModuleHead mn m                                              -- mlhr = ModuleHead-Location Relation
-    mli = concat [locationImportDecl mn d | d <- is]                            -- mli = ImportDecl-Location Relation
-    mle = concat [locationExportSpec mn d | d <- es]                            -- mle = ExportSpec-Location Relation
-    dlr = concat [locationDecl mn d | d <- ms]                                  -- dlr = Decl-Location Relation
-    mn = fromMaybe "?" $ Module.name m                                          -- mn = Module name
-    ms = Module.declarations m                                                  -- ms = module declaration list
-    is = Module.imports m                                                       -- is = import declaration list
-    es = getModuleExports $ Module.exports m
+source m = case Module.name m of
+  Just mn -> fromList $ mlr : mlhr ++ mli ++ mle ++ dlr
+    where
+      mlr = locationModule mn m                                                         -- mlr = Module-Location Relation
+      mlhr = locationModuleHead mn m                                                    -- mlhr = ModuleHead-Location Relation
+      mli = concat [locationImportDecl mn d | d <- Module.imports m]                    -- mli = ImportDecl-Location Relation
+      mle = concat [locationExportSpec mn d | d <- getModuleExports $ Module.exports m] -- mle = ExportSpec-Location Relation
+      dlr = concat [locationDecl mn d | d <- Module.declarations m]                     -- dlr = Decl-Location Relation
+  Nothing -> empty
+
+-- | Helper to extract Exports
 getModuleExports :: Maybe (ExportSpecList l) -> [ExportSpec l]
 getModuleExports (Just (ExportSpecList _ es)) = es
 getModuleExports Nothing = []
