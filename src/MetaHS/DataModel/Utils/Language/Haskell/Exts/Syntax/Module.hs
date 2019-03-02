@@ -61,6 +61,13 @@ exports m = f $ headExports <$> head m
   where
     f = fromMaybe Nothing
 
+-- | Returns the ExportSpecList as list
+getModuleExports :: Module l                 -- ^ The Module to analyze.
+                 -> [ExportSpec l]           -- ^ The ExportSpecList for this Module.
+getModuleExports m = case exports m of
+  (Just (ExportSpecList _ es)) -> es
+  Nothing -> []
+
 -- | Returns the pragmas of a module.
 pragmas :: Module l         -- ^ The Module to analyze.
         -> [ModulePragma l] -- ^ The list of ModulePragma objects for this Module.
@@ -81,3 +88,4 @@ declarations :: Module l  -- ^ The Module to analyze.
 declarations (Module _ _ _ _ x)            = x
 declarations (XmlHybrid _ _ _ _ x _ _ _ _) = x
 declarations _                             = []
+
