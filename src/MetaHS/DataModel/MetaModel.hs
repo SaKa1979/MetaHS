@@ -37,6 +37,21 @@ data Element
         -- ^ The qualified name of the module.
         }
     -- ^ Represents a module
+    | ModuleHead
+        { name :: !String
+        -- ^ The qualified name of the module.
+        }
+    -- ^ Represents a module head
+    | ModuleImport
+        { name :: !String
+        -- ^ The qualified name of the imported module.
+        }
+    -- ^ Represents a module import
+    | ModuleExport
+        { name :: !String
+        -- ^ The qualified name of the exported module.
+        }
+    -- ^ Represents a module export
     | Function
         { name :: !String
         -- ^ The qualified name of the function.
@@ -52,6 +67,21 @@ data Element
         -- ^ The qualified name of the type synonym.
         }
     -- ^ Represents a type synonym.
+    | TypeSignature
+        { name :: !String
+        -- ^ The qualified name of the type signature.
+        }
+        -- ^ Represents a type signature.
+    | TypeClass
+        { name :: !String
+        -- ^ The qualified name of the type instance.
+        }
+        -- ^ Represents a type instance.
+    | Instance
+        { name :: !String
+        -- ^ The qualified name of the type instance.
+        }
+        -- ^ Represents a type instance.
     | UnknownType
         { name :: !String
         -- ^ The "?" qualified name of the unknown type.
@@ -102,9 +132,15 @@ newtype MetaModel = MetaModel { getMetaModelImpl :: MetaModelImpl }
 instance Pretty Element where
     pPrint Program { name = n } = text "Program" <+> qt n
     pPrint Module { name = n } = text "Module" <+> qt n
+    pPrint ModuleHead { name = n } = text "ModuleHead" <+> qt n
+    pPrint ModuleImport { name = n } = text "ModuleImport" <+> qt n
+    pPrint ModuleExport { name = n } = text "ModuleExport" <+> qt n
     pPrint Function { name = n } = text "Function" <+> qt n
     pPrint DataType { name = n } = text "DataType" <+> qt n
     pPrint TypeSynonym { name = n } = text "TypeSynonym" <+> qt n
+    pPrint TypeSignature { name = n } = text "TypeSignature" <+> qt n
+    pPrint TypeClass { name = n } = text "TypeClass" <+> qt n
+    pPrint Instance { name = n } = text "Instance" <+> qt n
     pPrint UnknownType { name = n } = text "UnknownType" <+> qt n
     pPrint Location { locationPath = p
                     , locationStartLine = sl

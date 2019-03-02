@@ -20,71 +20,153 @@ import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Module
     as Module
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Decl
     as Decl
+import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.QName
+    as QName
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.DeclHead
     as DeclHead
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.SrcLoc
     as SrcLoc
+import Debug.Trace
 
 -- | Creates Location relations for all supported top-level declarations in the
 -- provided Module.
 source :: Module SrcSpanInfo  -- ^ The Module to analyze.
        -> MetaModel.Relation  -- ^ The resulting MetaModel.Relation items.
-source m = fromList $ mlr : concat [locationDecl mn d | d <- ds]
+--source m = fromList $ mlr : concat [locationDecl mn d | d <- ms]
+source m = fromList $ mlr : mlhr ++ mli ++ mle ++ dlr
   where
-    mlr = (me,mle)                                                              -- mlr = Module-Location-Relation
-    me  = MetaModel.Module mn                                                   -- me = Module Element
-    mle = SrcLoc.srcSpanInfoToLocationElement $ ann m                           -- mle = Module Location Element
-    mn  = fromMaybe "?" $ Module.name m                                         -- mn = Module name
-    ds  = Module.declarations m                                                 -- ds = declarations
+    mlr = locationModule mn m                                                   -- mlr = Module-Location Relation
+    mlhr = locationModuleHead mn m                                              -- mlhr = ModuleHead-Location Relation
+    mli = concat [locationImportDecl mn d | d <- is]                            -- mli = ImportDecl-Location Relation
+    mle = concat [locationExportSpec mn d | d <- es]                            -- mle = ExportSpec-Location Relation
+    dlr = concat [locationDecl mn d | d <- ms]                                  -- dlr = Decl-Location Relation
+    mn = fromMaybe "?" $ Module.name m                                          -- mn = Module name
+    ms = Module.declarations m                                                  -- ms = module declaration list
+    is = Module.imports m                                                       -- is = import declaration list
+    es = getModuleExports $ Module.exports m
+getModuleExports :: Maybe (ExportSpecList l) -> [ExportSpec l]
+getModuleExports (Just (ExportSpecList _ es)) = es
+getModuleExports Nothing = []
 
--- | Creates a list of (Module "mn",Location) pairs for a given top-level
--- declaration.
+
+-- | Creates a Module "m",Location "ml" pair for the whole module
+locationModule :: String                                -- ^ The module (head) name.
+               -> Module SrcSpanInfo                    -- ^ The Declaration with var l.
+               -> (MetaModel.Element,MetaModel.Element) -- ^ list of (Module "mn",Location) pairs
+locationModule mn (Module l _ _ _ _) = (m,ml)
+  where m =  MetaModel.Module mn
+        ml = SrcLoc.srcSpanInfoToLocationElement $ l
+
+-- | Creates a list of (Module head "mh",Location "mhl") pair for the ModuleHead
+locationModuleHead :: String                                  -- ^ The module (head) name.
+                   -> Module SrcSpanInfo                      -- ^ The Declaration with var l.
+                   -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Module head "mh",Location "mhl") pairs
+locationModuleHead mn (Module _ (Just (ModuleHead l _ _ _)) _ _ _) = [(mh,mhl)]
+                       where mh =  MetaModel.ModuleHead mn
+                             mhl = SrcLoc.srcSpanInfoToLocationElement l
+locationModuleHead mn (Module _ (Nothing) _ _ _) = []
+
+-- | Creates a list of (imported Module "mi",Location "mil") pair for the ImportDecl
+locationImportDecl :: String                                  -- ^ The module name.
+                   -> ImportDecl SrcSpanInfo                  -- ^ The Declaration with var l.
+                   -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (imported Module "mi",Location "mil") pairs
+locationImportDecl mn ImportDecl{importAnn=ia, importModule=im} = [(mi,mil)]
+                      where mi = MetaModel.ModuleImport $ makeQualifiedId mn $ hn im
+                            mil = SrcLoc.srcSpanInfoToLocationElement ia
+                            hn (ModuleName _ x) = x
+
+-- | Creates a (exported Modules "me",Location "mel") pair for the ExportSpec
+locationExportSpec :: String                                  -- ^ The module name.
+                   -> ExportSpec SrcSpanInfo                  -- ^ The Declaration with var l.
+                   -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (exported Modules "me",Location "mel") pairs
+locationExportSpec mn (EVar l qnm) = case QName.name qnm of
+    Just es -> [(me,mel)]
+      where me = MetaModel.ModuleExport $ makeQualifiedId mn es
+            mel = SrcLoc.srcSpanInfoToLocationElement l
+    Nothing -> []
+locationExportSpec _ _ = []
+
+-- | Creates a list of (Element,Location) pairs for a given top-level declaration.
 locationDecl :: String                                  -- ^ The module name.
-             -> Decl SrcSpanInfo                        -- ^ The Decl to process.
-             -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Module "mn",Location) pairs
+             -> Decl SrcSpanInfo                        -- ^ The Declaration with var l.
+             -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Element "te", Location "tl") pairs.
 locationDecl mn (TypeDecl l h _) = [(te,tl)]
   where
-    te = MetaModel.TypeSynonym $ qn mn $ DeclHead.name h
+    te = MetaModel.TypeSynonym $ makeQualifiedId mn $ DeclHead.name h
     tl = SrcLoc.srcSpanInfoToLocationElement l
 locationDecl mn dd@DataDecl{} = locationData mn dd
 locationDecl mn dd@GDataDecl{} = locationData mn dd
 locationDecl mn pb@PatBind{} = locationPattern mn pb
 locationDecl mn fb@FunBind{} = locationFunction mn fb
+locationDecl mn ts@TypeSig{} = locationTypeSig mn ts
+locationDecl mn tc@ClassDecl{} = locationTypeClass mn tc
+locationDecl mn id@InstDecl{} = locationInstance mn id
 locationDecl _ _ = []
 
--- | Creates a list of (Module "mn",Location) pairs for data type declarations.
-locationData :: String                -- ^ The module name.
-             -> Decl SrcSpanInfo      -- ^ The Decl to process.
-             -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Module "mn",Location) pairs
+-- | Creates a list of ((G)Dataconstructor qname "d", Location "dl") pairs for (g)DataDecl declarations.
+locationData :: String                                  -- ^ The module name.
+             -> Decl SrcSpanInfo                        -- ^ The Declaration with var l.
+             -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of ((G)Dataconstructor qname "d", Location "dl") pairs.
 locationData mn decl = case Decl.dataConstructor decl of
-    Just d -> [(de,dl)]
+    Just dc -> [(d,dl)]
       where
-        de = MetaModel.DataType $ qn mn $ Decl.dataConstructorName d
+        d = MetaModel.DataType $ makeQualifiedId mn $ Decl.dataConstructorName dc
         dl = SrcLoc.srcSpanInfoToLocationElement $ ann decl
     Nothing -> []
 
-
--- | Creates a list of (Module "mn",Location) pairs for PatBind declarations.
-locationPattern :: String                -- ^ The module name.
-                -> Decl SrcSpanInfo      -- ^ The Decl to process.
-                -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Module "mn",Location) pairs
-locationPattern mn pb@PatBind{} = case Decl.patternName pb of
-    Just pn -> [(p,c)]
+-- | Creates a list of (Pattern qname "p", Location "pl") pairs for PatBind declarations.
+locationPattern :: String                                   -- ^ The module name.
+                -> Decl SrcSpanInfo                         -- ^ The Declaration with var l.
+                -> [(MetaModel.Element,MetaModel.Element)]  -- ^ list of (Pattern qname "p", Location "pl") pairs.
+locationPattern mn patbin@PatBind{} = case Decl.patternName patbin of
+    Just pn -> [(p,pl)]
       where
-        p = MetaModel.Function $ qn mn pn
-        c = SrcLoc.srcSpanInfoToLocationElement $ ann pb
+        p = MetaModel.Function $ makeQualifiedId mn pn
+        pl = SrcLoc.srcSpanInfoToLocationElement $ ann patbin
     Nothing -> []
 locationPattern _ _ = []
 
-
 -- | Creates a list of (Module "mn",Location) pairs for FunBind declarations.
-locationFunction :: String                -- ^ The module name.
-                 -> Decl SrcSpanInfo      -- ^ The Decl to process.
-                 -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Module "mn",Location) pairs
-locationFunction mn fb@FunBind{} = case Decl.functionName fb of
-    Just fn -> [(p,c)]
+locationFunction :: String                                  -- ^ The module name.
+                 -> Decl SrcSpanInfo                        -- ^ The Declaration with var l.
+                 -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Function qname "f", Location "fl") pairs.
+locationFunction mn funbin@FunBind{} = case Decl.functionName funbin of
+    Just fn -> [(f,fl)]
       where
-        p = MetaModel.Function $ qn mn fn
-        c = SrcLoc.srcSpanInfoToLocationElement $ ann fb
+        f = MetaModel.Function $ makeQualifiedId mn fn
+        fl = SrcLoc.srcSpanInfoToLocationElement $ ann funbin
     Nothing -> []
 locationFunction _ _ = []
+
+-- | Creates a list of (TypeSignature "ts",Location "tsl") pairs for TypeSignature declarations.
+locationTypeSig :: String                                  -- ^ The module name.
+                -> Decl SrcSpanInfo                        -- ^ The Declaration with var l.
+                -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (TypeSignature qname, "ts",Location "tsl") pairs.
+locationTypeSig mn tysig@TypeSig{} = case Decl.typeSigName tysig of
+  Just tsn -> [(ts,tsl)]
+    where ts = MetaModel.TypeSignature $ makeQualifiedId mn tsn
+          tsl = SrcLoc.srcSpanInfoToLocationElement $ ann tysig
+  Nothing -> []
+locationTypeSig _ _ = []
+
+-- | Creates a list of (TypeClass "tc",Location "tcl") pairs for TypeClass declarations.
+locationTypeClass :: String                                  -- ^ The module name.
+                  -> Decl SrcSpanInfo                        -- ^ The Declaration with var l.
+                  -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (TypeClass qname, "tc",Location "tcl") pairs.
+locationTypeClass mn tycla@ClassDecl{} = case Decl.typeClassName tycla of
+  Just tcn -> [(ts,tsl)]
+    where ts = MetaModel.TypeClass $ makeQualifiedId mn tcn
+          tsl = SrcLoc.srcSpanInfoToLocationElement $ ann tycla
+  Nothing -> []
+locationTypeClass _ _ = []
+
+-- | Creates a list of (Instance "i",Location "il") pairs for Instance declarations.
+locationInstance :: String                                   -- ^ The module name.
+                  -> Decl SrcSpanInfo                        -- ^ The Declaration with var l.
+                  -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Instance qname, "i",Location "il") pairs.
+locationInstance mn inst@InstDecl{} = case Decl.instanceName inst of
+  Just inm -> [(i,il)]
+    where i = MetaModel.Instance $ makeQualifiedId mn inm
+          il = SrcLoc.srcSpanInfoToLocationElement $ ann inst
+  Nothing -> []
+locationInstance _ _ = []

@@ -39,6 +39,7 @@ modulesInHierarchy directoryPath = do
     allFiles <- filesInHierarchy directoryPath
     parseResults <- mapM parseFile allFiles
     let (parsed, failed) = partition isParseOk parseResults
+--    let modules = trace ("" ++ show (map fromParseResult parsed)) (map fromParseResult parsed)
     let modules = map fromParseResult parsed
     return (modules, failed)
       where

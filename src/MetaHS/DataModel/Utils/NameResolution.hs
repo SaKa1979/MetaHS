@@ -66,7 +66,7 @@ resolveType :: String            -- ^ The simple value name.
 resolveType s nrms = fromMaybe unknown lookupResult
   where
     lookupResult = Map.lookup s $ fst nrms                                      -- lookupResult = result from the lookup in the types NameResolutionMap
-    unknown = MetaModel.UnknownType $ qn "?" s                                  -- unknown = UnknownType object in case lookupResult == Nothing
+    unknown = MetaModel.UnknownType $ makeQualifiedId "?" s                     -- unknown = UnknownType object in case lookupResult == Nothing
 
 
 -- | Resolves a simple value name to the corresponding qualified Element.
@@ -78,7 +78,7 @@ resolveValue :: String            -- ^ The simple value name.
 resolveValue s nrms = fromMaybe unknown lookupResult
   where
     lookupResult = Map.lookup s $ snd nrms                                      -- lookupResult = result from the lookup in the value NameResolutionMap
-    unknown = MetaModel.Function $ qn "?" s                                     -- unknown = Function object in case lookupResult == Nothing
+    unknown = MetaModel.Function $ makeQualifiedId "?" s                        -- unknown = Function object in case lookupResult == Nothing
 
 
 -- | Returns True if the Relation is of the form (Module "mn",Element)

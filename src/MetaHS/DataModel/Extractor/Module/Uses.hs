@@ -34,7 +34,7 @@ uses :: Module SrcSpanInfo  -- ^ The module to analyze
 uses m rs = case Module.name m of
   Just mn -> fromList $ concat [usesDecl mn d nrms | d <- Module.declarations m]
     where
-      nrms = createNameResolutionMaps mn rs                                     -- nrms = name resolution maps
+      nrms = createNameResolutionMaps mn rs         -- nrms = name resolution maps
   Nothing -> empty
 
 -- | Analyzes a declaration for `Uses` information.
@@ -59,7 +59,7 @@ usesType :: String                                  -- ^ The name of the Module.
 usesType mn d nrms = case d of
     (TypeDecl _ h t) -> rs
       where
-        p = MetaModel.TypeSynonym $ qn mn $ DeclHead.name h                     -- p = parent
+        p = MetaModel.TypeSynonym $ makeQualifiedId mn $ DeclHead.name h        -- p = parent
         es = [resolveType tcns nrms | tcns <- findTyConNames t]                 -- es = elements, tcns = TyCon names
         rs = [(p,c) | c <- es]                                                  -- p = parent, c = child, rs = relations
     _ -> []
@@ -75,7 +75,7 @@ usesTypeSig _ d nrms = case d of
       where
         ps = [resolveValue (Name.name n) nrms | n <- ns]                        -- ps = parents
         es = [resolveType tcns nrms | tcns <- findTyConNames t]                 -- es = elements, tcns = TyCon names
-        rs = [(p,c) | p <- ps, c <- es]                            -- p = parent, c = child, rs = relations
+        rs = [(p,c) | p <- ps, c <- es]                                         -- p = parent, c = child, rs = relations
     _ -> []
 
 
@@ -88,7 +88,7 @@ usesData mn d nrms = case Decl.dataConstructor d of
     Just a -> udc a
       where
         dcn = Decl.dataConstructorName a                                        -- dcn  = data constructor name
-        dce = MetaModel.DataType $ qn mn dcn                                    -- dce  = data constructor element
+        dce = MetaModel.DataType $ makeQualifiedId mn dcn                       -- dce  = data constructor element
 
         -- Creates `Uses` relation for the data constructor.
         udc :: Decl.DataConstructor -> [(MetaModel.Element,MetaModel.Element)]  -- udc = uses data constructor
@@ -102,7 +102,7 @@ usesData mn d nrms = case Decl.dataConstructor d of
         uvc vc = vcud : (vcrs ++ frs)
           where
             vcn = Decl.valueConstructorName vc                                  -- vcn = value constructor name
-            vce = MetaModel.Function $ qn mn vcn                                -- vce = value constructor element
+            vce = MetaModel.Function $ makeQualifiedId mn vcn                                -- vce = value constructor element
             vcud = (vce,dce)                                                    -- Value Constructor `Uses` DataType
 
             vcts = Decl.valueConstructorTypes vc                                -- vcts = value Constructor Types
@@ -132,10 +132,10 @@ usesPattern :: String                                   -- ^ The name of the Mod
 usesPattern mn pb@(PatBind _ (PVar _ _) rhs wheres) nrms = trs ++ vrs
   where
     pn = fromMaybe "" $ Decl.patternName pb                                     -- pn = pattern name
-    p = MetaModel.Function $ qn mn pn                                           -- p = parent
+    p = MetaModel.Function $ makeQualifiedId mn pn                              -- p = parent
     tycons = findTyConNames rhs ++ findTyConNames wheres                        -- tycons = TyCon objects found
     qnames = findQNames rhs ++ findQNames wheres                                -- qnames = QName objects
-    locals = findPatVars rhs ++ findPatVars wheres ++                            -- locals = local definitions
+    locals = findPatVars rhs ++ findPatVars wheres ++                           -- locals = local definitions
              findFunctionNames rhs ++ findFunctionNames wheres
 
     exts = nub (qnames \\ tycons) \\ locals                                     -- exts = external names found
@@ -152,12 +152,12 @@ usesFunction :: String                                  -- ^ The name of the Mod
 usesFunction mn fb@(FunBind _ matches) nrms = trs ++ vrs
   where
     fn = fromMaybe "" $ Decl.functionName fb                                    -- fn = function name
-    p = MetaModel.Function $ qn mn fn                                           -- p = parent
+    p = MetaModel.Function $ makeQualifiedId mn fn                              -- p = parent
     tycons = findTyConNames matches                                             -- tycons = TyCon objects found
     qnames = findQNames matches                                                 -- qnames = QName objects
     locals = findPatVars matches ++ (nub (findFunctionNames matches) \\ [fn])   -- locals = local definitions
 
-    exts = nub (qnames \\ tycons) \\ locals                                     -- exts = external names found
+    exts = nub (qnames \\ tycons) \\ locals                      -- exts = external names found
     trs = [(p,resolveType c nrms) | c <- tycons]                 -- trs = types relations
     vrs = [(p,resolveValue c nrms) | c <- exts]                  -- trs = values relations
 usesFunction _ _ _ = []

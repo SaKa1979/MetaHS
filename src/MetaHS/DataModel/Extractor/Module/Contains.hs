@@ -50,7 +50,7 @@ containsType mn d = case d of
   (TypeDecl _ h _) -> [(p,c)]
     where
       p = MetaModel.Module mn
-      c = MetaModel.TypeSynonym $ qn mn $ DeclHead.name h
+      c = MetaModel.TypeSynonym $ makeQualifiedId mn $ DeclHead.name h
   _ -> []
 
 -- | Creates a list of (Element,Element) pairs for a top-level data (DataDecl)
@@ -63,7 +63,7 @@ containsData mn d =  case Decl.dataConstructor d of
       where
         me  = MetaModel.Module mn                                               -- module element
         dcn = Decl.dataConstructorName a                                        -- dcn  = data constructor name
-        dce = MetaModel.DataType $ qn mn dcn                                    -- dce  = data constructor element
+        dce = MetaModel.DataType $ makeQualifiedId mn dcn                       -- dce  = data constructor element
 
         -- Creates `Contain` relation for the data constructor.
         cdc :: Decl.DataConstructor -> [(MetaModel.Element,MetaModel.Element)]  -- cdc = contains data constructor
@@ -78,7 +78,7 @@ containsData mn d =  case Decl.dataConstructor d of
           where
             mvcr = (me,vce)                                                     -- Module `Contains` value constructor relation
             dvcr = (dce,vce)                                                    -- Data `Contains` value constructor relation
-            vce = MetaModel.Function $ qn mn vcn                                -- vce = value constructor element
+            vce = MetaModel.Function $ makeQualifiedId mn vcn                                -- vce = value constructor element
             vcn = Decl.valueConstructorName vc                                  -- vcn = value constructor name
             cfs = concat [cf f | f <- Decl.valueConstructorFields vc]           -- cfs = `Contains` relation for sub fields (if present)
 
@@ -86,9 +86,9 @@ containsData mn d =  case Decl.dataConstructor d of
         cf :: Decl.Field -> [(MetaModel.Element,MetaModel.Element)]
         cf f = mfr ++ dfr
           where
-            mfr = [(me,fe) | fe <- fes]                        -- Module `Contains` field relation
-            dfr = [(dce,fe) | fe <- fes]                       -- Data `Contains` field relation
-            fes = [MetaModel.Function (qn mn n) | n <- Decl.fieldNames f]       -- fes = field elements
+            mfr = [(me,fe) | fe <- fes]                                                     -- Module `Contains` field relation
+            dfr = [(dce,fe) | fe <- fes]                                                    -- Data `Contains` field relation
+            fes = [MetaModel.Function (makeQualifiedId mn n) | n <- Decl.fieldNames f]      -- fes = field elements
     Nothing -> []
 
 
@@ -101,20 +101,20 @@ containsPattern mn pb@PatBind{} = case Decl.patternName pb of
     Just pn -> [(p,c)]
       where
         p = MetaModel.Module mn
-        c = MetaModel.Function $ qn mn pn
+        c = MetaModel.Function $ makeQualifiedId mn pn
     Nothing -> []
 containsPattern _ _ = []
 
 
 -- | Creates a list of (Module "mn",Function "fn") pairs for a top-level
 -- function (FunBind) declaration.
-containsFunction :: String                -- ^ Name of the module
-                 -> Decl SrcSpanInfo      -- ^ The top-level declaration
+containsFunction :: String                                   -- ^ Name of the module
+                 -> Decl SrcSpanInfo                         -- ^ The top-level declaration
                  -> [(MetaModel.Element,MetaModel.Element)]  -- ^ list of (Module "mn",Function "fn") pairs
 containsFunction mn fb@FunBind{} = case Decl.functionName fb of
     Just pn -> [(p,c)]
       where
         p = MetaModel.Module mn
-        c = MetaModel.Function $ qn mn pn
+        c = MetaModel.Function $ makeQualifiedId mn pn
     Nothing -> []
 containsFunction _ _ = []

@@ -26,7 +26,7 @@ srcLocToLocationElement s = Location
     }
 
 -- | Creates a Location Element containing the information
---   of the SrcSoan object.
+--   of the SrcSpan object.
 srcSpanToLocationElement :: SrcSpan -- ^ The SrcSpan object to analyze.
                          -> Element -- ^ The resulting Element.
 srcSpanToLocationElement s = Location
@@ -41,4 +41,4 @@ srcSpanToLocationElement s = Location
 --   of the SrcSpanInfo object.
 srcSpanInfoToLocationElement :: SrcSpanInfo -- ^ The SrcSpanInfo object to analyze.
                              -> Element     -- ^ The resulting Element.
-srcSpanInfoToLocationElement = srcSpanToLocationElement .srcInfoSpan
+srcSpanInfoToLocationElement = srcSpanToLocationElement . srcInfoSpan

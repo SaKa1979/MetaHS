@@ -8,7 +8,7 @@ Stability   : experimental
 Name utility functions for the MetaHS data model layer.
 -}
 module MetaHS.DataModel.Utils.Name
-    ( qn
+    ( makeQualifiedId
     , split
     , isLocal
     ) where
@@ -17,10 +17,10 @@ import Data.List (intercalate, isSuffixOf, elemIndex)
 import Data.List.Split (splitOn)
 
 -- Qualify identifier
-qn :: String  -- ^ The qualifier String (e.g. "MetaHS.DataModel.Extractor.Module.Source").
+makeQualifiedId :: String  -- ^ The qualifier String (e.g. "MetaHS.DataModel.Extractor.Module.Source").
    -> String  -- ^ The local identifier String (e.g. "qn").
    -> String  -- ^ The resulting qualified String (e.g. "MetaHS.DataModel.Extractor.Module.Source.qn").
-qn a b = a ++ "." ++ b
+makeQualifiedId a b = a ++ "." ++ b
 
 
 -- | Splits an indentifier in the qualifier and name parts.

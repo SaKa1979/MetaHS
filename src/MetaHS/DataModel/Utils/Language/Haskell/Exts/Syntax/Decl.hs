@@ -14,6 +14,7 @@ import Data.Maybe ()
 import Language.Haskell.Exts.Syntax
 import Language.Haskell.Exts.SrcLoc
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name as Name
+import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.QName as QName
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.DeclHead as DeclHead
 
 -- | Returns the SrcSpanInfo object associated with the Decl object.
@@ -128,3 +129,26 @@ functionName (FunBind _ ms) = Just . fn $ head ms
     fn (Match _ x _ _ _)        = Name.name x
     fn (InfixMatch _ _ x _ _ _) = Name.name x
 functionName _ = Nothing
+
+-- | Returns the name of the TypeSig if possible.
+typeSigName :: Decl SrcSpanInfo
+            -> Maybe String
+typeSigName (TypeSig _ [] _) = Nothing
+typeSigName (TypeSig _ n _) = Just $ Name.name $ head n
+
+-- | Returns the name of the typeClass if possible.
+typeClassName :: Decl SrcSpanInfo
+              -> Maybe String
+typeClassName (ClassDecl _ _ (DHApp _ (DHead _ n) _) _ _) = Just $ Name.name n
+typeClassName _ = Nothing
+
+-- | Returns the name of the Instance (as "<type-class> <data-type>") if possible.
+instanceName :: Decl SrcSpanInfo
+              -> Maybe String
+instanceName (InstDecl _ _ (IRule _ _ _ (IHApp _ ih t)) _) = fn ih t
+  where fn :: InstHead l -> Type l -> Maybe String
+        fn (IHCon _ qntc) (TyCon _ qnt) = case (QName.name qntc, QName.name qnt) of
+          (Just qntc, Just qnt) -> Just $ "(" ++ qntc ++ " " ++ qnt ++ ")"
+          (Nothing, _) -> Nothing
+          (_, Nothing) -> Nothing
+instanceName _ = Nothing
