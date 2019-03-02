@@ -45,7 +45,8 @@ internalUsesGraph :: MetaModel  -- ^ The meta-model.
 internalUsesGraph metaModel moduleElement directed = graph
   where
     graph = mkGraph ns es
-    elements = moduleContains metaModel moduleElement
+    elements = [x | x@Function{}  <- mc] ++ [x | x@DataType{}  <- mc] ++ [x | x@TypeSynonym{}  <- mc]
+    mc = moduleContains metaModel moduleElement
 
     ns :: [LNode Element]
     ns = zipWith f [0..] elements                                               -- ns = nodes
