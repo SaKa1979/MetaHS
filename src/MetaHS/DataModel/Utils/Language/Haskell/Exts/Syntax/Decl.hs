@@ -16,7 +16,7 @@ import Language.Haskell.Exts.SrcLoc
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name as Name
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.QName as QName
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.DeclHead as DeclHead
-
+import Debug.Trace
 -- | Returns the SrcSpanInfo object associated with the Decl object.
 srcSpanInfo :: Decl SrcSpanInfo -> SrcSpanInfo
 srcSpanInfo = ann
@@ -147,8 +147,17 @@ instanceName :: Decl SrcSpanInfo
               -> Maybe String
 instanceName (InstDecl _ _ (IRule _ _ _ (IHApp _ ih t)) _) = fn ih t
   where fn :: InstHead l -> Type l -> Maybe String
-        fn (IHCon _ qntc) (TyCon _ qnt) = case (QName.name qntc, QName.name qnt) of
-          (Just qntc, Just qnt) -> Just $ "(" ++ qntc ++ " " ++ qnt ++ ")"
-          (Nothing, _) -> Nothing
-          (_, Nothing) -> Nothing
+        fn (IHCon _ qntc) (TyCon _ qnt) =
+          case (QName.name qntc, QName.name qnt)
+            of
+            (Just qntc, Just qnt) -> Just $ "(" ++ qntc ++ " " ++ qnt ++ ")"
+            (Nothing, _) -> Nothing
+            (_, Nothing) -> Nothing
+        fn (IHCon _ qntc) (TyParen _ (TyCon _ qnt)) =
+          case (QName.name qntc, QName.name qnt)
+            of
+            (Just qntc, Just qnt) -> Just $ "(" ++ qntc ++ " " ++ qnt ++ ")"
+            (Nothing, _) -> Nothing
+            (_, Nothing) -> Nothing
+        fn _ _ = Nothing
 instanceName _ = Nothing
