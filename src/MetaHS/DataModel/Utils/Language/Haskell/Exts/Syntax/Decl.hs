@@ -16,7 +16,7 @@ import Language.Haskell.Exts.SrcLoc
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name as Name
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.QName as QName
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.DeclHead as DeclHead
-import Debug.Trace
+
 -- | Returns the SrcSpanInfo object associated with the Decl object.
 srcSpanInfo :: Decl SrcSpanInfo -> SrcSpanInfo
 srcSpanInfo = ann

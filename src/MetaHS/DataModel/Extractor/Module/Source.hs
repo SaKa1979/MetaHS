@@ -14,7 +14,6 @@ module MetaHS.DataModel.Extractor.Module.Source
 import           Data.Maybe                                                   (fromMaybe)
 import           Data.Set                                                     (empty,
                                                                                fromList)
-import           Debug.Trace
 import           Language.Haskell.Exts
 import qualified MetaHS.DataModel.MetaModel                                   as MetaModel
 import           MetaHS.DataModel.Utils

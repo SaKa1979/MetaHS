@@ -4,7 +4,6 @@ module MetaHS.Extensions.LOC
   ) where
 
 import qualified Data.Set                   as Set
-import           Debug.Trace
 import           MetaHS.DataModel.MetaModel
 import           MetaHS.EDSL.MetaModel
 

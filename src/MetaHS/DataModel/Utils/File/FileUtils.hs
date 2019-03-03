@@ -17,7 +17,6 @@ import System.FilePath
 import Control.Monad
 import Data.List (partition)
 import Language.Haskell.Exts
-import Debug.Trace
 -- | Flattens the hierarchy of a directory to a list of files.
 filesInHierarchy :: FilePath      -- ^ The directory hierarchy to analyze.
                  -> IO [FilePath] -- ^ The files found in the directory hierarchy.
