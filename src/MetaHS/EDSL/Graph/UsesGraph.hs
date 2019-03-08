@@ -45,7 +45,7 @@ internalUsesGraph :: MetaModel  -- ^ The meta-model.
 internalUsesGraph metaModel moduleElement directed = graph
   where
     graph = mkGraph ns es
-    elements = [x | x@Function{}  <- mc] ++ [x | x@DataType{}  <- mc] ++ [x | x@TypeSynonym{}  <- mc]
+    elements = [m | m  <- mc, isInteresting m]
     mc = moduleContains metaModel moduleElement
 
     ns :: [LNode Element]
@@ -122,3 +122,10 @@ internalUsesParams metaModel moduleElement directed editorLink =
     urlQuery mm e = pack $ case elementSource mm e of
         Just s -> editorLink ++ locationToQuery s
         _ -> ""
+
+-- | The Elements for which the lcom is measured.
+isInteresting :: Element -> Bool
+isInteresting (TypeSynonym{}) = True
+isInteresting (DataType{}) = True
+isInteresting (Function{}) = True
+isInteresting  _ = False
