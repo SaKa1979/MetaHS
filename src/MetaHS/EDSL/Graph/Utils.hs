@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.EDSL.Graph.Utils
 Description : Utilities for handling graphs
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

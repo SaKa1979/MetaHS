@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.Extractor.Program.Contains
 Description : The MetaHS extractor for contains relations
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

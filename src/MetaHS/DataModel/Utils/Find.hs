@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Find
 Description : Generic SYB functions for finding certain nodes
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

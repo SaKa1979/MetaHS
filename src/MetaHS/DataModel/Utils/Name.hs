@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Name
 Description : Utility functions for the MetaHS data model layer.
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

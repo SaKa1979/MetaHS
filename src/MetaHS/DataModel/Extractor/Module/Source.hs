@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.Extractor.Module.Source
 Description : The MetaHS extractor for source relations
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

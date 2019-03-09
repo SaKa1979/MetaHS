@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Decl
 Description : Utility functions for Decl objects.
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

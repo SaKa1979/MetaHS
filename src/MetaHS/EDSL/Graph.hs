@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.EDSL.Graph
 Description : The MetaHS EDSL Graph part
-License     : None
+License     : <to be determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

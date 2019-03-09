@@ -1,3 +1,10 @@
+{-|
+Module      : MetaHS.Extensions.MacroLevelAggregation.Utils
+Description : Utility functions for accessing the metric information in the MetaModel
+License     : <to-be-determined>
+Maintainer  : sanderkamps79@gmail.com
+Stability   : experimental
+-}
 module MetaHS.Extensions.MacroLevelAggregation.Utils
     (getMetricElements)
     where

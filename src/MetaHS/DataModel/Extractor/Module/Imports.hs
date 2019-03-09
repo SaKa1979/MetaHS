@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.Extractor.Module.Imports
 Description : The MetaHS extractor for import relations.
-License     : None
+License     : <to-be-determined>
 Maintainer  : sanderkamps79@gmail.com
 Stability   : experimental
 

@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.EDSL
 Description : The MetaHS EDSL
-License     : None
+License     : <to be determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

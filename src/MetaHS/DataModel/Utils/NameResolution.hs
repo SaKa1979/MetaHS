@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.Utils.NameResolution
 Description : The MetaHS extractor for uses relations
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

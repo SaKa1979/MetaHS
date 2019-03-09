@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.EDSL.MetaModel
 Description : The MetaHS EDSL MetaModel part
-License     : None
+License     : <to be determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 
@@ -62,21 +62,18 @@ generateMetaModel :: String                 -- ^ The program name.
                   -> String                 -- ^ The parse error output path.
                   -> IO MetaModel.MetaModel -- ^ The resulting meta-model.
 generateMetaModel programName programPath parseErrorsPath = do
-    (mods, failed) <- modulesInHierarchy programPath                            -- mods = modules, failed = ParseFailed
-    writeFile parseErrorsPath $ show $ map show failed
-
-    let pc = ProgramContains.contains programName mods                          -- pc = program contains
-    let mc = Set.unions [ModuleContains.contains m | m <- mods]                 -- mc = module contains
-    let mu = Set.unions [ModuleUses.uses m mc | m <- mods]                      -- mu = module uses
-    let ms = Set.unions [ModuleSource.source m | m <- mods]                     -- ms = modules source
-    let im = Set.unions [ModuleImports.imports m | m <- mods]                   -- im = module imports
-
-    return . MetaModel.MetaModel
-        $ Map.insert keyContains ( Set.union pc mc )
-        $ Map.insert keyUses mu
-        $ Map.insert keySource ms
-        $ Map.insert keyImports im
-        $ Map.empty
+  (mods, failed) <- modulesInHierarchy programPath -- mods = modules, failed = ParseFailed
+  writeFile parseErrorsPath $ show $ map show failed
+  let pc = ProgramContains.contains programName mods -- pc = program contains
+  let mc = Set.unions [ModuleContains.contains m | m <- mods] -- mc = module contains
+  let mu = Set.unions [ModuleUses.uses m mc | m <- mods] -- mu = module uses
+  let ms = Set.unions [ModuleSource.source m | m <- mods] -- ms = modules source
+  let im = Set.unions [ModuleImports.imports m | m <- mods] -- im = module imports
+  return . MetaModel.MetaModel $
+    Map.insert keyContains (Set.union pc mc)
+    $ Map.insert keyUses mu
+    $ Map.insert keySource ms
+    $ Map.insert keyImports im Map.empty
 
 
 -- | Write a meta-model to a file.
@@ -238,7 +235,7 @@ domain :: String                    -- ^ The metamodel key string.
        -> Set.Set MetaModel.Element -- ^ Set of Elements that form the domain of the binary relation.
 domain k mm = foldr f Set.empty r
   where
-    f a b = Set.insert (fst a) b
+    f a = Set.insert (fst a)
     r = getRelation k mm
 
 -- Returns the range for a specified relation in the metamodel.
@@ -247,7 +244,7 @@ range :: String                    -- ^ The metamodel key string.
       -> Set.Set MetaModel.Element -- ^ Set of Elements that form the range of the binary relation.
 range k mm = foldr f Set.empty r
   where
-    f a b = Set.insert (snd a) b
+    f a = Set.insert (snd a)
     r = getRelation k mm
 
 

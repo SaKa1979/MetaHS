@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.EDSL.Graph.Types
 Description : The MetaHS EDSL Graph types
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.MetaModel
 Description : The MetaHS metamodel
-License     : None
+License     : <to be determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 

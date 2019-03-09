@@ -1,13 +1,17 @@
 {-|
 Module      : MetaHS.Extensions.LCOM
 Description : The MetaHS EDSL LCOM part
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 
 Metamodel Elements that are interesting (those that are used to determine nodes in
 MetaHS.EDSL.Graph.UsesGraph module ) are : TypeSynonym, DataType, Function.
 All other Elements that are  part of the _contains relations are ignored.
+
+LCOM4 - Number of connected components in the graph that represents each method as a node and the sharing of at least
+        one attribute/method as an edge.
+        ref. Hitz and Montazeri (1995)
 -}
 module MetaHS.Extensions.LCOM
     ( lcom
@@ -57,6 +61,6 @@ lcomAggregator :: MetaModel
                -> MetaModel
 lcomAggregator mm = setRelation keyLcom r mm
   where
-    r = foldr f Set.empty $ filter (\x -> not $ x == Module{name="?"}) $ getModules mm -- r = relation
-    f m s = Set.insert (m,lv m) s                                                      -- f = foldr function
+    r = foldr f Set.empty $ filter (\x -> x /= Module {name = "?"}) $ getModules mm -- r = relation
+    f m = Set.insert (m, lv m) -- f = foldr function
     lv m = IntValue $ lcom mm m                                                        -- lv = LCOM value

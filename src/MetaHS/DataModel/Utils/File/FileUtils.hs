@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.DataModel.Utils.File.FileUtils
 Description : Utility functions for files and directories.
-License     : None
+License     : <to-be-determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 
@@ -22,13 +22,13 @@ import Language.Haskell.Exts
 filesInHierarchy :: FilePath      -- ^ The directory hierarchy to analyze.
                  -> IO [FilePath] -- ^ The files found in the directory hierarchy.
 filesInHierarchy dir = do
-    rawDirList <- listDirectory dir
-    let dirList = map (dir </>) $ rawDirList
-    files <- filterM doesFileExist dirList
-    let pureHaskellModuleFiles = filter (\p -> takeExtension p == ".hs") dirList --todo how to exclude test directory?
-    subDirs <- filterM doesDirectoryExist dirList
-    subDirFiles <- mapM filesInHierarchy subDirs
-    return $ pureHaskellModuleFiles ++ concat subDirFiles
+  rawDirList <- listDirectory dir
+  let dirList = map (dir </>) rawDirList
+  files <- filterM doesFileExist dirList
+  let pureHaskellModuleFiles = filter (\p -> takeExtension p == ".hs") dirList --todo how to exclude test directory?
+  subDirs <- filterM doesDirectoryExist dirList
+  subDirFiles <- mapM filesInHierarchy subDirs
+  return $ pureHaskellModuleFiles ++ concat subDirFiles
 
 -- | Attempts to extract modules for each file in the directory hierarchy
 --   The returned tuple contains the successfully extracted modules and the
@@ -39,7 +39,6 @@ modulesInHierarchy directoryPath = do
     allFiles <- filesInHierarchy directoryPath
     parseResults <- mapM parseFile allFiles
     let (parsed, failed) = partition isParseOk parseResults
---    let modules = trace ("" ++ show (map fromParseResult parsed)) (map fromParseResult parsed)
     let modules = map fromParseResult parsed
     return (modules, failed)
       where

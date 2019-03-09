@@ -1,7 +1,7 @@
 {-|
 Module      : MetaHS.EDSL.Graph.UsesGraph
 Description : Generates a Uses graph for a module
-License     : None
+License     : <to be determined>
 Maintainer  : hhrf.vos@studie.ou.nl
 Stability   : experimental
 
@@ -125,7 +125,7 @@ internalUsesParams metaModel moduleElement directed editorLink =
 
 -- | The Elements for which the lcom is measured.
 isInteresting :: Element -> Bool
-isInteresting (TypeSynonym{}) = True
-isInteresting (DataType{}) = True
-isInteresting (Function{}) = True
+isInteresting TypeSynonym{} = True
+isInteresting DataType{} = True
+isInteresting Function{} = True
 isInteresting  _ = False
