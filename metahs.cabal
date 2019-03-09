@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9f4f9e24d185c9a00afee27941e59848326ad2b70d86dc3b944bd55ced599341
+-- hash: e7c9ffcc832365a59c0f4f29e917cf70f9d2d26d6f3e3fc12eeb5b720c3379ff
 
 name:           metahs
 version:        0.1.0.0
@@ -28,6 +28,7 @@ source-repository head
 library
   exposed-modules:
       MetaHS.DataModel.Extractor.Module.Contains
+      MetaHS.DataModel.Extractor.Module.Imports
       MetaHS.DataModel.Extractor.Module.Source
       MetaHS.DataModel.Extractor.Module.Uses
       MetaHS.DataModel.Extractor.Program.Contains
@@ -51,6 +52,7 @@ library
       MetaHS.EDSL.Graph.Utils
       MetaHS.EDSL.MetaModel
       MetaHS.EDSL.Utils
+      MetaHS.Extensions.CBO
       MetaHS.Extensions.LCOM
       MetaHS.Extensions.LOC
       MetaHS.Extensions.MacroLevelAggregation.Average

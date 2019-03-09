@@ -17,6 +17,7 @@ import System.FilePath
 import Control.Monad
 import Data.List (partition)
 import Language.Haskell.Exts
+
 -- | Flattens the hierarchy of a directory to a list of files.
 filesInHierarchy :: FilePath      -- ^ The directory hierarchy to analyze.
                  -> IO [FilePath] -- ^ The files found in the directory hierarchy.
@@ -24,7 +25,7 @@ filesInHierarchy dir = do
     rawDirList <- listDirectory dir
     let dirList = map (dir </>) $ rawDirList
     files <- filterM doesFileExist dirList
-    let pureHaskellModuleFiles = filter (\p -> takeExtension p == ".hs") dirList
+    let pureHaskellModuleFiles = filter (\p -> takeExtension p == ".hs") dirList --todo how to exclude test directory?
     subDirs <- filterM doesDirectoryExist dirList
     subDirFiles <- mapM filesInHierarchy subDirs
     return $ pureHaskellModuleFiles ++ concat subDirFiles

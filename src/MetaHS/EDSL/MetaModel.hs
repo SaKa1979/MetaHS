@@ -16,27 +16,30 @@ module MetaHS.EDSL.MetaModel
     , numberOfItems
     , getPrograms
     , getModules
-    , elementContains
     , programContains
     , moduleContains
-    , elementUses
+    , moduleImports
+    , elementContains
+    , elementImports
     , elementSource
+    , elementUses
     , getRelation
     , setRelation
     , domain
     , range
     , RelationKey
     ) where
-import qualified Data.Set as Set
-import qualified Data.Map.Strict as Map
-import Data.Maybe (listToMaybe)
-import qualified MetaHS.DataModel.MetaModel as MetaModel
+import qualified Data.Map.Strict                             as Map
+import           Data.Maybe                                  (listToMaybe)
+import qualified Data.Set                                    as Set
+import qualified MetaHS.DataModel.Extractor.Module.Contains  as ModuleContains
+import qualified MetaHS.DataModel.Extractor.Module.Imports   as ModuleImports
+import qualified MetaHS.DataModel.Extractor.Module.Source    as ModuleSource
+import qualified MetaHS.DataModel.Extractor.Module.Uses      as ModuleUses
 import qualified MetaHS.DataModel.Extractor.Program.Contains as ProgramContains
-import qualified MetaHS.DataModel.Extractor.Module.Contains as ModuleContains
-import qualified MetaHS.DataModel.Extractor.Module.Uses as ModuleUses
-import qualified MetaHS.DataModel.Extractor.Module.Source as ModuleSource
-import MetaHS.DataModel.Utils.File.FileUtils
-import Text.PrettyPrint
+import qualified MetaHS.DataModel.MetaModel                  as MetaModel
+import           MetaHS.DataModel.Utils.File.FileUtils
+import           Text.PrettyPrint
 
 type RelationKey = String
 
@@ -48,6 +51,9 @@ keyUses = "_uses"
 
 keySource :: RelationKey
 keySource = "_source"
+
+keyImports :: RelationKey
+keyImports = "_imports"
 
 
 -- | Generates a meta-model.
@@ -63,11 +69,13 @@ generateMetaModel programName programPath parseErrorsPath = do
     let mc = Set.unions [ModuleContains.contains m | m <- mods]                 -- mc = module contains
     let mu = Set.unions [ModuleUses.uses m mc | m <- mods]                      -- mu = module uses
     let ms = Set.unions [ModuleSource.source m | m <- mods]                     -- ms = modules source
+    let im = Set.unions [ModuleImports.imports m | m <- mods]                   -- im = module imports
 
     return . MetaModel.MetaModel
         $ Map.insert keyContains ( Set.union pc mc )
         $ Map.insert keyUses mu
         $ Map.insert keySource ms
+        $ Map.insert keyImports im
         $ Map.empty
 
 
@@ -122,7 +130,7 @@ getPrograms mm = Set.elems $ Set.foldr f Set.empty pcs
 
 -- | Returns a list of Modules contained in the metamodel.
 getModules :: MetaModel.MetaModel  -- ^ The metamodel.
-                            -> [MetaModel.Element]  -- ^ The Modules contained by the specified Program.
+           -> [MetaModel.Element]  -- ^ The Modules contained by the specified Program.
 getModules mm = Set.elems $ Set.foldr f Set.empty pcs
   where
     f (p,c) ms
@@ -131,7 +139,34 @@ getModules mm = Set.elems $ Set.foldr f Set.empty pcs
     pcs = getRelation keyContains mm
 
 
--- | Returns a list of Elements contained by the specifed Element.
+-- | Returns a list of Elements contained by the specified Program.
+programContains :: MetaModel.MetaModel  -- ^ The meta-model.
+                -> MetaModel.Element    -- ^ The specified Program.
+                -> [MetaModel.Element]  -- ^ The Elements contained by the specified Program.
+programContains mm e
+    | isProgram e = elementContains mm e
+    | otherwise = error "Function MetaHS.EDSL.MetaModel.programContains only works for MetaHS.DataModel.MetaModel.Program Elements!"
+
+
+-- | Returns a list of Elements contained by the specified Module.
+moduleContains :: MetaModel.MetaModel  -- ^ The meta-model.
+               -> MetaModel.Element    -- ^ The specified Module.
+               -> [MetaModel.Element]  -- ^ The Elements contained by the specified Module.
+moduleContains mm e
+    | isModule e = elementContains mm e
+    | otherwise = error "Function MetaHS.EDSL.MetaModel.moduleContains only works for MetaHS.DataModel.MetaModel.Module Elements!"
+
+
+-- | Returns a list of Elements imported by the specified Module.
+moduleImports :: MetaModel.MetaModel   -- ^ The meta-model.
+               -> MetaModel.Element    -- ^ The specified Module.
+               -> [MetaModel.Element]  -- ^ The Elements contained by the specified Module.
+moduleImports mm e
+    | isModule e = elementImports mm e
+    | otherwise = error "Function MetaHS.EDSL.MetaModel.moduleContains only works for MetaHS.DataModel.MetaModel.Module Elements!"
+
+
+-- | Returns a list of Elements contained by the specified Element.
 elementContains :: MetaModel.MetaModel  -- ^ The meta-model.
                 -> MetaModel.Element    -- ^ The specified Element.
                 -> [MetaModel.Element]  -- ^ The Elements contained by the specified Element.
@@ -143,37 +178,19 @@ elementContains mm e = Set.foldr f [] pcs
     pcs = getRelation keyContains mm
 
 
--- | Returns a list of Elements contained by the specifed Program.
-programContains :: MetaModel.MetaModel  -- ^ The meta-model.
-                -> MetaModel.Element    -- ^ The specified Program.
-                -> [MetaModel.Element]  -- ^ The Elements contained by the specified Program.
-programContains mm e
-    | isProgram e = elementContains mm e
-    | otherwise = error "Function MetaHS.EDSL.MetaModel.programContains only works for MetaHS.DataModel.MetaModel.Program Elements!"
-
-
--- | Returns a list of Elements contained by the specifed Module.
-moduleContains :: MetaModel.MetaModel  -- ^ The meta-model.
-               -> MetaModel.Element    -- ^ The specified Module.
-               -> [MetaModel.Element]  -- ^ The Elements contained by the specified Module.
-moduleContains mm e
-    | isModule e = elementContains mm e
-    | otherwise = error "Function MetaHS.EDSL.MetaModel.moduleContains only works for MetaHS.DataModel.MetaModel.Module Elements!"
-
-
--- | Returns a list of Elements used by the specifed Element.
-elementUses :: MetaModel.MetaModel  -- ^ The meta-model.
-            -> MetaModel.Element    -- ^ The specified Element.
-            -> [MetaModel.Element]  -- ^ The Elements used by the specified Element.
-elementUses mm e = Set.foldr f [] pcs
+-- | Returns a list of Elements imported by the specified Element.
+elementImports :: MetaModel.MetaModel  -- ^ The meta-model.
+                -> MetaModel.Element    -- ^ The specified Element.
+                -> [MetaModel.Element]  -- ^ The Elements contained by the specified Element.
+elementImports mm e = Set.foldr f [] pcs
   where
     f (p,c) es
         | p == e = c : es
         | otherwise = es
-    pcs = getRelation keyUses mm
+    pcs = getRelation keyImports mm
 
 
--- | Returns a the source location for the specifed Element.
+-- | Returns a the source location for the specified Element.
 elementSource :: MetaModel.MetaModel      -- ^ The meta-model.
               -> MetaModel.Element        -- ^ The specified Element.
               -> Maybe MetaModel.Element  -- ^ The source location for the specified Element.
@@ -183,6 +200,18 @@ elementSource mm e = listToMaybe $ Set.foldr f [] pcs
         | p == e = c : es
         | otherwise = es
     pcs = getRelation keySource mm
+
+
+-- | Returns a list of Elements used by the specified Element.
+elementUses :: MetaModel.MetaModel  -- ^ The meta-model.
+            -> MetaModel.Element    -- ^ The specified Element.
+            -> [MetaModel.Element]  -- ^ The Elements used by the specified Element.
+elementUses mm e = Set.foldr f [] pcs
+  where
+    f (p,c) es
+        | p == e = c : es
+        | otherwise = es
+    pcs = getRelation keyUses mm
 
 
 -- | Returns the relation corresponding to the supplied key or an empty Set.

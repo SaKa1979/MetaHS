@@ -147,17 +147,13 @@ instanceName :: Decl SrcSpanInfo
               -> Maybe String
 instanceName (InstDecl _ _ (IRule _ _ _ (IHApp _ ih t)) _) = fn ih t
   where fn :: InstHead l -> Type l -> Maybe String
-        fn (IHCon _ qntc) (TyCon _ qnt) =
-          case (QName.name qntc, QName.name qnt)
-            of
-            (Just qntc, Just qnt) -> Just $ "(" ++ qntc ++ " " ++ qnt ++ ")"
-            (Nothing, _) -> Nothing
-            (_, Nothing) -> Nothing
-        fn (IHCon _ qntc) (TyParen _ (TyCon _ qnt)) =
-          case (QName.name qntc, QName.name qnt)
-            of
-            (Just qntc, Just qnt) -> Just $ "(" ++ qntc ++ " " ++ qnt ++ ")"
-            (Nothing, _) -> Nothing
-            (_, Nothing) -> Nothing
-        fn _ _ = Nothing
+        fn (IHCon _ qntc) ty = do
+          qnt <- isTycon ty
+          n1 <- QName.name qntc
+          n2 <- QName.name qnt
+          return $ "(" ++ n1 ++ " " ++ n2 ++ ")"
+
+        isTycon (TyCon _ qnt) = Just qnt
+        isTycon (TyParen _ (TyCon _ qnt)) = Just qnt
+        isTycon _ = Nothing
 instanceName _ = Nothing
