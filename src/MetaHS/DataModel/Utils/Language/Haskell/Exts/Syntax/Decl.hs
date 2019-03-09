@@ -152,8 +152,10 @@ instanceName (InstDecl _ _ (IRule _ _ _ (IHApp _ ih t)) _) = fn ih t
           n1 <- QName.name qntc
           n2 <- QName.name qnt
           return $ "(" ++ n1 ++ " " ++ n2 ++ ")"
-
+        fn _ _ = Nothing
         isTycon (TyCon _ qnt) = Just qnt
         isTycon (TyParen _ (TyCon _ qnt)) = Just qnt
         isTycon _ = Nothing
+
+
 instanceName _ = Nothing
