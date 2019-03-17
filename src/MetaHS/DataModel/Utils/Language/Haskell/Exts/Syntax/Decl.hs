@@ -156,6 +156,10 @@ instanceName (InstDecl _ _ (IRule _ _ _ (IHApp _ ih t)) _) = fn ih t
         isTycon (TyCon _ qnt) = Just qnt
         isTycon (TyParen _ (TyCon _ qnt)) = Just qnt
         isTycon _ = Nothing
-
-
 instanceName _ = Nothing
+
+-- | Returns the name of the InlineSig if possible.
+inlineSigName :: Decl SrcSpanInfo
+              -> Maybe String
+inlineSigName (InlineSig _ _ _ qn) = QName.name qn
+inlineSigName _ = Nothing

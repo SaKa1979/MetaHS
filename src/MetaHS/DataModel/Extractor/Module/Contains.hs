@@ -76,6 +76,7 @@ containsDecl mn fb@FunBind{} = containsFunction mn fb
 containsDecl mn ts@TypeSig{} = containsTypeSig mn ts
 containsDecl mn tc@ClassDecl{} = containsTypeClass mn tc
 containsDecl mn id@InstDecl{} = containsInstance mn id
+containsDecl mn id@InlineSig{} = containsInlineSig mn id
 containsDecl _ _ = []
 
 
@@ -181,4 +182,14 @@ containsInstance mn inst@InstDecl{} = case Decl.instanceName inst of
   Just inm -> [(m,i)]
     where m = MetaModel.Module mn
           i = MetaModel.Instance $ makeQualifiedId mn inm
+  Nothing -> []
+
+-- | Creates a list of (Module "m",Pragma "p") pairs for Instance declarations.
+containsInlineSig :: String                                   -- ^ The module name.
+                  -> Decl SrcSpanInfo                        -- ^ The Declaration with var l.
+                  -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Module "m",Pragma "p") pairs.
+containsInlineSig mn inlsig@InlineSig{} = case Decl.inlineSigName inlsig of
+  Just inm -> [(m,i)]
+    where m = MetaModel.Module mn
+          i = MetaModel.Pragma $ makeQualifiedId mn inm
   Nothing -> []

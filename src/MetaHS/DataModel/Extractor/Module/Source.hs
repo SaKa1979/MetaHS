@@ -87,6 +87,7 @@ locationDecl mn fb@FunBind{}   = locationFunction mn fb
 locationDecl mn ts@TypeSig{}   = locationTypeSig mn ts
 locationDecl mn tc@ClassDecl{} = locationTypeClass mn tc
 locationDecl mn id@InstDecl{}  = locationInstance mn id
+locationDecl mn is@InlineSig{} = locationInlineSig mn is
 locationDecl _ _               = []
 
 -- | Creates a list of (TypeSynonym qname "ts", Location "dl") pairs for (g)DataDecl declarations.
@@ -161,4 +162,14 @@ locationInstance mn inst@InstDecl{} = case Decl.instanceName inst of
   Just inm -> [(i,il)]
     where i = MetaModel.Instance $ makeQualifiedId mn inm
           il = SrcLoc.srcSpanInfoToLocationElement $ ann inst
+  Nothing -> []
+
+-- | Creates a list of (Pragma "p",Location "pl") pairs for InlineSig declarations.
+locationInlineSig :: String                                   -- ^ The module name.
+                  -> Decl SrcSpanInfo                        -- ^ The Declaration with var l.
+                  -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Pragma qname, "p",Location "pl") pairs.
+locationInlineSig mn inlsig@InlineSig{} = case Decl.inlineSigName inlsig of
+  Just isnm -> [(p,pl)]
+    where p = MetaModel.Pragma $ makeQualifiedId mn isnm
+          pl = SrcLoc.srcSpanInfoToLocationElement $ ann inlsig
   Nothing -> []

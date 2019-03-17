@@ -57,4 +57,5 @@ isInteresting Function{} = True
 isInteresting TypeSignature{} = True
 isInteresting TypeClass{} = True
 isInteresting Instance{} = True
+isInteresting Pragma{} = True
 isInteresting  _ = False

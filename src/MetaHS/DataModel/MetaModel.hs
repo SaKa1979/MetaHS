@@ -81,7 +81,11 @@ data Element
         { name :: !String
         -- ^ The qualified name of the type instance.
         }
-        -- ^ Represents a type instance.
+    | Pragma
+        { name :: !String
+        -- ^ The qualified name of the inline Pragma.
+        }
+        -- ^ Represents an inline Pragma.
     | UnknownType
         { name :: !String
         -- ^ The "?" qualified name of the unknown type.
@@ -141,6 +145,7 @@ instance Pretty Element where
     pPrint TypeSignature { name = n } = text "TypeSignature" <+> qt n
     pPrint TypeClass { name = n } = text "TypeClass" <+> qt n
     pPrint Instance { name = n } = text "Instance" <+> qt n
+    pPrint Pragma { name = n } = text "Pragma" <+> qt n
     pPrint UnknownType { name = n } = text "UnknownType" <+> qt n
     pPrint Location { locationPath = p
                     , locationStartLine = sl
