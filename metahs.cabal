@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.0.
+-- This file has been generated from package.yaml by hpack version 0.31.1.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e7c9ffcc832365a59c0f4f29e917cf70f9d2d26d6f3e3fc12eeb5b720c3379ff
+-- hash: 6964da8c692b553b41cbf7cac4cc8dd1cbc5c8b179856ce8ead0b1f7c8d1ea0a
 
 name:           metahs
 version:        0.1.0.0
@@ -60,6 +60,7 @@ library
       MetaHS.Extensions.MacroLevelAggregation.GiniCoefficient
       MetaHS.Extensions.MacroLevelAggregation.IdealValueDeviation
       MetaHS.Extensions.MacroLevelAggregation.Median
+      MetaHS.Extensions.MacroLevelAggregation.Population
       MetaHS.Extensions.MacroLevelAggregation.Utils
   other-modules:
       Paths_metahs
