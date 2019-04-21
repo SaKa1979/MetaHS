@@ -8,10 +8,10 @@ import MetaHS.Extensions.MacroLevelAggregation.Utils
 import qualified MetaHS.DataModel.MetaModel as MetaModel
 import MetaHS.EDSL.MetaModel
 
--- | Calculate the average of the metric values associated with the supplied metric Relation key
-median :: RelationKey          -- ^ The MetaModel Relation Key (E.g., LCOM).
+-- | Calculate the median of the metric values associated with the supplied metric Relation key
+median :: RelationKey           -- ^ The MetaModel Relation Key (E.g., LCOM).
         -> MetaModel.MetaModel  -- ^ The MetaModel Containing the associated key.
-        -> Double               -- ^ The average
+        -> Double               -- ^ The median
 median key mm = calcMedian values
   where
     values = getMetricElements key mm
