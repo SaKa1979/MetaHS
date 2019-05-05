@@ -63,8 +63,8 @@ module Spec where
                                                (createTestMm [21,22,23] "LCOM") 4 10 20)
   testIvdLowIdeal =     TestCase $ assertEqual "Ivd_LowIdeal [5,4,10,9] == 0.5" 0.5 (idealValueDeviation "LCOM"
                                                (createTestMm [5,4,10,9] "LCOM") 4 10 20)
-  testIvdIdealHigh =    TestCase $ assertEqual "Ivd_IdealHigh [6,11,18,25] == 0.5" 0.5 (idealValueDeviation "LCOM"
-                                               (createTestMm [6,11,18,25] "LCOM") 4 10 20)
+  testIvdIdealHigh =    TestCase $ assertEqual "Ivd_IdealHigh [6,11,19,25] == 0.5" 0.5 (idealValueDeviation "LCOM"
+                                               (createTestMm [6,11,19,25] "LCOM") 4 10 20)
 
   -- DISTRIBUTION
   testDist =           TestCase $ assertEqual "Dist [1,2,2,3,3,3] == [(1,1),(2,2),(3,3)]"
