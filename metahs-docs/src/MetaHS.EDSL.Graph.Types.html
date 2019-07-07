@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">{-|
+Module      : MetaHS.EDSL.Graph.Types
+Description : The MetaHS EDSL Graph types
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
+Stability   : experimental
+MetaHS EDSL Graph types
+-}</span><span>
+</span><a name="line-10"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">MetaHS.EDSL.Graph.Types</span><span>
+</span><a name="line-11"></a><span>    </span><span class="hs-special">(</span><span> </span><a href="MetaHS.EDSL.Graph.Types.html#GraphType"><span class="hs-identifier hs-type">GraphType</span></a><span>
+</span><a name="line-12"></a><span>    </span><span class="hs-special">,</span><span> </span><a href="MetaHS.EDSL.Graph.Types.html#ParamsType"><span class="hs-identifier hs-type">ParamsType</span></a><span>
+</span><a name="line-13"></a><span>    </span><span class="hs-special">,</span><span> </span><a href="MetaHS.EDSL.Graph.Types.html#Directed"><span class="hs-identifier hs-type">Directed</span></a><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><a name="line-14"></a><span>    </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><a name="line-15"></a><span>
+</span><a name="line-16"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">Data.Text.Lazy</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-type">Text</span><span class="hs-special">)</span><span>
+</span><a name="line-17"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">Data.Graph.Inductive</span><span>
+</span><a name="line-18"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">Data.GraphViz</span><span>
+</span><a name="line-19"></a><span class="hs-keyword">import</span><span> </span><a href="MetaHS.DataModel.MetaModel.html"><span class="hs-identifier">MetaHS.DataModel.MetaModel</span></a><span> </span><span class="hs-special">(</span><a href="MetaHS.DataModel.MetaModel.html#Element"><span class="hs-identifier hs-type">Element</span></a><span class="hs-special">)</span><span>
+</span><a name="line-20"></a><span>
+</span><a name="line-21"></a><span class="hs-comment">-- | Type synonym for generated LCOM graph.</span><span>
+</span><a name="line-22"></a><span class="hs-keyword">type</span><span> </span><a name="GraphType"><a href="MetaHS.EDSL.Graph.Types.html#GraphType"><span class="hs-identifier">GraphType</span></a></a><span>  </span><span class="hs-glyph">=</span><span> </span><span class="hs-identifier hs-type">Gr</span><span> </span><a href="MetaHS.DataModel.MetaModel.html#Element"><span class="hs-identifier hs-type">Element</span></a><span> </span><span class="hs-identifier hs-type">Text</span><span>
+</span><a name="line-23"></a><span>
+</span><a name="line-24"></a><span class="hs-comment">-- | Type synonym for generated GraphvizParams.</span><span>
+</span><a name="line-25"></a><span class="hs-keyword">type</span><span> </span><a name="ParamsType"><a href="MetaHS.EDSL.Graph.Types.html#ParamsType"><span class="hs-identifier">ParamsType</span></a></a><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-identifier hs-type">GraphvizParams</span><span> </span><span class="hs-identifier hs-type">Node</span><span> </span><a href="MetaHS.DataModel.MetaModel.html#Element"><span class="hs-identifier hs-type">Element</span></a><span> </span><span class="hs-identifier hs-type">Text</span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span> </span><a href="MetaHS.DataModel.MetaModel.html#Element"><span class="hs-identifier hs-type">Element</span></a><span>
+</span><a name="line-26"></a><span>
+</span><a name="line-27"></a><span class="hs-comment">-- | Determines whether the graph should be directed or undirected.</span><span>
+</span><a name="line-28"></a><span class="hs-keyword">data</span><span> </span><a name="Directed"><a href="MetaHS.EDSL.Graph.Types.html#Directed"><span class="hs-identifier">Directed</span></a></a><span> </span><span class="hs-glyph">=</span><span> </span><a name="Directed"><a href="MetaHS.EDSL.Graph.Types.html#Directed"><span class="hs-identifier">Directed</span></a></a><span> </span><span class="hs-glyph">|</span><span> </span><a name="Undirected"><a href="MetaHS.EDSL.Graph.Types.html#Undirected"><span class="hs-identifier">Undirected</span></a></a></pre></body></html>

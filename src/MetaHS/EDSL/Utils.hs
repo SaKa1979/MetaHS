@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.EDSL.Utils
 Description : The MetaHS EDSL Utils part
-License     : <to be determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 MetaHS EDSL Utils part
 -}
 module MetaHS.EDSL.Utils
@@ -16,7 +16,6 @@ module MetaHS.EDSL.Utils
 import System.FilePath.Posix (joinPath, splitPath)
 import MetaHS.DataModel.Utils (split, isLocal)
 import qualified MetaHS.DataModel.MetaModel as MetaModel
-
 
 -- | Converts a Location Element to a query String suitable for URLs.
 --   An empty String is returned if the Element is not a Location Element.

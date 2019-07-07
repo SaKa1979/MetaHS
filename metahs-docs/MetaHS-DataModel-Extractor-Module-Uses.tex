@@ -1,0 +1,23 @@
+\haddockmoduleheading{MetaHS.DataModel.Extractor.Module.Uses}
+\label{module:MetaHS.DataModel.Extractor.Module.Uses}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Extractor.Module.Uses (
+    uses
+  ) where\end{verbatim}}
+\haddockendheader
+
+MetaHS extractor for module level uses relations\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+uses
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module SrcSpanInfo} & The module to analyze \\
+\haddockdecltt{->} & \haddockdecltt{Relation} & list of Element \haddocktt{Contains} Element \\
+\haddockdecltt{->} & \haddockdecltt{Relation} & list of Element \haddocktt{Uses} Element \\
+\end{tabulary}\par
+Create MetaModel.Contains relations for top-level declarations of a module.\par
+
+\end{haddockdesc}

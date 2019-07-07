@@ -1,10 +1,10 @@
 name:                metahs
-version:             0.1.0.0
-github:           "https://SaKa1979@bitbucket.org/SaKa1979/metahs"
-license:             BSD3
+version:             0.0.1
+github:              "https://SaKa1979@bitbucket.org/SaKa1979/metahs"
+license:             MIT
 author:              "Henrie Vos, Sander Kamps"
 maintainer:          "sanderkamps79@gmail.com"
-copyright:           "2018 Sander Kamps"
+copyright:           "2019 Sander Kamps"
 
 extra-source-files:
 - README.md

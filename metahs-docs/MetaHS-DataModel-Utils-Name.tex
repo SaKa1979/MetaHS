@@ -1,0 +1,44 @@
+\haddockmoduleheading{MetaHS.DataModel.Utils.Name}
+\label{module:MetaHS.DataModel.Utils.Name}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Utils.Name (
+    makeQualifiedId,  split,  isLocal
+  ) where\end{verbatim}}
+\haddockendheader
+
+Name utility functions for the MetaHS data model layer.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+makeQualifiedId
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The qualifier String (e.g. \haddocktt{MetaHS.DataModel.Extractor.Module.Source}). \\
+\haddockdecltt{->} & \haddockdecltt{String} & The local identifier String (e.g. "qn"). \\
+\haddockdecltt{->} & \haddockdecltt{String} & The resulting qualified String (e.g. "MetaHS.DataModel.Extractor.Module.Source.qn"). \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+split
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The qualified String to split. \\
+\haddockdecltt{->} & \haddockdecltt{(String, String)} & The qualified and name parts. \\
+\end{tabulary}\par
+Splits an identifier in the qualifier and name parts.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+isLocal
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The qualifier. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The qualified name. \\
+\haddockdecltt{->} & \haddockdecltt{Bool} & True if the qualified name is local to the qualifier. \\
+\end{tabulary}\par
+Determines whether a given qualified name is local to the given qualifier.\par
+
+\end{haddockdesc}

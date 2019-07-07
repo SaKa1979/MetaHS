@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.Extensions.LCOM
 Description : The MetaHS EDSL LCOM part
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Metamodel Elements that are interesting (those that are used to determine nodes in
 MetaHS.EDSL.Graph.UsesGraph module ) are : TypeSynonym, DataType, Function.
 All other Elements that are  part of the _contains relations are ignored.
@@ -26,7 +26,6 @@ import MetaHS.DataModel.MetaModel
 import MetaHS.EDSL.MetaModel
 import MetaHS.EDSL.Graph
 
-
 -- | Calculates the LCOM metric value for a specified module name.
 lcom :: MetaModel -- ^ The meta-model.
      -> Element   -- ^ The Module Element.
@@ -34,7 +33,6 @@ lcom :: MetaModel -- ^ The meta-model.
 lcom metaModel moduleElement = do
     let (value, _, _) = lcomGraph metaModel moduleElement Directed ""
     value
-
 
 -- | Generates the internalUsesGraph for the specified Module Element and
 -- calculates the corresponding LCOM metric value.
@@ -47,11 +45,9 @@ lcomGraph metaModel moduleElement directed editorLink = do
     let (graph, params) = internalUses metaModel moduleElement directed editorLink
     (noComponents graph, graph, params)
 
-
 -- | MetaModel key used for the LCOM relation.
 keyLcom :: RelationKey
 keyLcom = "LCOM"
-
 
 -- | LCOM aggregator that adds the LCOM relation to the metamodel.
 -- key = keyLcom

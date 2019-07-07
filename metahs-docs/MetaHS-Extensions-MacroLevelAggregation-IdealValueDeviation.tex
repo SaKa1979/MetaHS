@@ -1,0 +1,32 @@
+\haddockmoduleheading{MetaHS.Extensions.MacroLevelAggregation.IdealValueDeviation}
+\label{module:MetaHS.Extensions.MacroLevelAggregation.IdealValueDeviation}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.Extensions.MacroLevelAggregation.IdealValueDeviation (
+    idealValueDeviation
+  ) where\end{verbatim}}
+\haddockendheader
+
+Calculates the deviation to a supplied 'ideal value' in a range between
+a lower and upper bound for the median of metric values corresponding to
+supplied Relation Key. Result is a value bounded by {\char 91}0,1{\char 93}.
+Empirically determined values are:
+LOC; low = -15, ideal = 69, upper = 269
+LCOM: low = 0, ideal = 1, upper = 11
+CBO: low = 0, ideal = 6, upper = 16\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+idealValueDeviation
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{RelationKey} & The MetaModel Relation Key (E.g., LCOM). \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The MetaModel Containing the associated key. \\
+\haddockdecltt{->} & \haddockdecltt{Int} & The lower bound. \\
+\haddockdecltt{->} & \haddockdecltt{Int} & The ideal value. \\
+\haddockdecltt{->} & \haddockdecltt{Int} & The upper bound. \\
+\haddockdecltt{->} & \haddockdecltt{Double} & The deviation from the ideal value. \\
+\end{tabulary}\par
+Calculate the Ideal Value Deviation of the metric values associated with the supplied metric Relation key.\par
+
+\end{haddockdesc}

@@ -1,10 +1,9 @@
 {-|
 Module      : MetaHS.DataModel.Utils.File.FileUtils
-Description : Utility functions for files and directories.
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Utility functions for files and directories.
 -}
 module MetaHS.DataModel.Utils.File.FileUtils

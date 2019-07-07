@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.QName
 Description : Utility functions for ConDecl objects.
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Utility functions for ConDecl objects.
 -}
 module MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.ConDecl

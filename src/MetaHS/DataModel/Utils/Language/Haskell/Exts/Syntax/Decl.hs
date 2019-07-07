@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Decl
 Description : Utility functions for Decl objects.
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Utility functions for Decl objects.
 -}
 module MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Decl
@@ -20,7 +20,6 @@ import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.DeclHead as
 -- | Returns the SrcSpanInfo object associated with the Decl object.
 srcSpanInfo :: Decl SrcSpanInfo -> SrcSpanInfo
 srcSpanInfo = ann
-
 
 -- | Represents the (simplified) information for a data constructor.
 data DataConstructor
@@ -117,7 +116,6 @@ patternName :: Decl SrcSpanInfo
             -> Maybe String
 patternName (PatBind _ (PVar _ n) _ _) = Just $ Name.name n
 patternName _ = Nothing
-
 
 -- | Returns the name of the FunBind if possible.
 functionName :: Decl SrcSpanInfo

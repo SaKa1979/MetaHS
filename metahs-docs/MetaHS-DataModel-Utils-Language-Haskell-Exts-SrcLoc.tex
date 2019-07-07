@@ -1,0 +1,48 @@
+\haddockmoduleheading{MetaHS.DataModel.Utils.Language.Haskell.Exts.SrcLoc}
+\label{module:MetaHS.DataModel.Utils.Language.Haskell.Exts.SrcLoc}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Utils.Language.Haskell.Exts.SrcLoc (
+    srcLocToLocationElement,  srcSpanToLocationElement, 
+    srcSpanInfoToLocationElement
+  ) where\end{verbatim}}
+\haddockendheader
+
+Utility functions for SrcLoc and related objects.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+srcLocToLocationElement
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{SrcLoc} & The SrcLoc object to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The resulting Element. \\
+\end{tabulary}\par
+Creates a Location Element containing the information
+   of the SrcLoc object.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+srcSpanToLocationElement
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{SrcSpan} & The SrcSpan object to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The resulting Element. \\
+\end{tabulary}\par
+Creates a Location Element containing the information
+   of the SrcSpan object.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+srcSpanInfoToLocationElement
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{SrcSpanInfo} & The SrcSpanInfo object to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The resulting Element. \\
+\end{tabulary}\par
+Creates a Location Element containing the information
+   of the SrcSpanInfo object.\par
+
+\end{haddockdesc}

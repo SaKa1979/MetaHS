@@ -1,11 +1,10 @@
 {-|
 Module      : MetaHS.Extensions
 Description : The MetaHS LCOM aggregation
-License     : <to-be-determined>
-Maintainer  : sanderkamps79@gmail.com
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-Date        : 3/9/19
-
 Metamodel Element that is interesting (those that represents modules being imported) is :
 Module. All other Elements that are part of the _contains relations are ignored.
 
@@ -39,8 +38,8 @@ cboAggregator mm = setRelation keyCbo r mm
 
 calcCbo ::
      MetaModel-- ^ The meta-model.
-  -> Element -- ^ Module
-  -> Int -- ^ The calculated LCOM metric value.
+  -> Element  -- ^ Module
+  -> Int      -- ^ The calculated LCOM metric value.
 calcCbo mm mod = length xs
   where
     xs = filter isInteresting $ moduleImports mm mod

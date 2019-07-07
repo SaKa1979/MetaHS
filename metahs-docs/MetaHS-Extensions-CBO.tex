@@ -1,0 +1,35 @@
+\haddockmoduleheading{MetaHS.Extensions.CBO}
+\label{module:MetaHS.Extensions.CBO}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.Extensions.CBO (
+    keyCbo,  cboAggregator
+  ) where\end{verbatim}}
+\haddockendheader
+
+Metamodel Element that is interesting (those that represents modules being imported) is :
+Module. All other Elements that are part of the {\char '137}contains relations are ignored.\par
+CBO - Coupling between object classes
+      The coupling between object classes (CBO) metric represents the number of classes coupled to a given class
+      (efferent couplings, Ce).
+      This coupling can occur through method calls, field accesses, inheritance, arguments, return types, and exceptions.
+      ref. Chidamber and Kemerer (1994)\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+keyCbo\ ::\ RelationKey
+\end{tabular}]\haddockbegindoc
+MetaModel key used for the CBO relation.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+cboAggregator
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The supplied meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The complemented meta-model. \\
+\end{tabulary}\par
+CBO aggregator that adds the CBO metric relation to the supplied meta-model.\par
+
+\end{haddockdesc}

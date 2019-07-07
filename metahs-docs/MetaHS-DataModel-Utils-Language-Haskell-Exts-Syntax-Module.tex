@@ -1,0 +1,144 @@
+\haddockmoduleheading{MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Module}
+\label{module:MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Module}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Module (
+    srcSpanInfo,  head,  headName,  headWarningText,  headExports,  name, 
+    warningText,  exports,  getModuleExports,  pragmas,  imports,  declarations
+  ) where\end{verbatim}}
+\haddockendheader
+
+Utility functions for Modules objects.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+srcSpanInfo
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module SrcSpanInfo} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{SrcSpanInfo} & The SrcSpanInfo for this Module. \\
+\end{tabulary}\par
+Returns the location information of a Module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+head
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module l} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Maybe (ModuleHead l)} & The ModuleHead for this Module. \\
+\end{tabulary}\par
+Returns the ModuleHead of a Module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+headName
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{ModuleHead l} & The ModuleHead to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The name of this ModuleHead. \\
+\end{tabulary}\par
+Returns the name of the module contained in the ModuleHead.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+headWarningText
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{ModuleHead l} & The ModuleHead to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Maybe (WarningText l)} & The WarningText for this ModuleHead. \\
+\end{tabulary}\par
+Returns the WarningText contained in the ModuleHead\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+headExports
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{ModuleHead l} & The ModuleHead to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Maybe (ExportSpecList l)} & The ExportSpecList for this ModuleHead. \\
+\end{tabulary}\par
+Return the ExportSpecList contained in the ModuleHead.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+name
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module l} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Maybe String} & The Name of this Module. \\
+\end{tabulary}\par
+Returns the name of a Module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+warningText
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module l} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Maybe (WarningText l)} & The WarningText for this Module. \\
+\end{tabulary}\par
+Returns the WarningText of a Module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+exports
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module l} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Maybe (ExportSpecList l)} & The ExportSpecList for this Module. \\
+\end{tabulary}\par
+Returns the ExportSpecList of a Module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+getModuleExports
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module l} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{[ExportSpec l]} & The ExportSpecList for this Module. \\
+\end{tabulary}\par
+Returns the ExportSpecList as list\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+pragmas
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module l} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{[ModulePragma l]} & The list of ModulePragma objects for this Module. \\
+\end{tabulary}\par
+Returns the pragmas of a module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+imports
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module l} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{[ImportDecl l]} & The list of ImportDecl objects for this Module. \\
+\end{tabulary}\par
+Returns the imports of a module\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+declarations
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module l} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{[Decl l]} & The list of Decl objects for this Module. \\
+\end{tabulary}\par
+Returns the Decl of a module\par
+
+\end{haddockdesc}

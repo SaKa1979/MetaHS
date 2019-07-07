@@ -1,3 +1,18 @@
+{-|
+Module      : MetaHS.MacroLevelAggregation
+Description : The MetaHS Macro-level aggregation method: ideal value deviation (IVD)
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
+Stability   : experimental
+Calculates the deviation to a supplied 'ideal value' in a range between
+a lower and upper bound for the median of metric values corresponding to
+supplied Relation Key. Result is a value bounded by [0,1].
+Empirically determined values are:
+LOC; low = -15, ideal = 69, upper = 269
+LCOM: low = 0, ideal = 1, upper = 11
+CBO: low = 0, ideal = 6, upper = 16
+-}
 module MetaHS.Extensions.MacroLevelAggregation.IdealValueDeviation
   (idealValueDeviation)
   where

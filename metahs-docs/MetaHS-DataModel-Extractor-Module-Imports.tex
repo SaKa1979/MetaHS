@@ -1,0 +1,25 @@
+\haddockmoduleheading{MetaHS.DataModel.Extractor.Module.Imports}
+\label{module:MetaHS.DataModel.Extractor.Module.Imports}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Extractor.Module.Imports (
+    imports
+  ) where\end{verbatim}}
+\haddockendheader
+
+MetaHS extractor for module level import relations.
+Currently only (Module,Module) relations are created from
+ImportDecl-importModule.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+imports
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module SrcSpanInfo} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Relation} & The resulting MetaModel.Relation items. \\
+\end{tabulary}\par
+Creates Location relations for all supported top-level declarations in the
+ | provided Module.\par
+
+\end{haddockdesc}

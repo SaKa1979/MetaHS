@@ -1,0 +1,27 @@
+\haddockmoduleheading{MetaHS.EDSL.Graph.Utils}
+\label{module:MetaHS.EDSL.Graph.Utils}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.EDSL.Graph.Utils (
+    graphToImage
+  ) where\end{verbatim}}
+\haddockendheader
+
+Utilities for handling graphs\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+graphToImage
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{GraphvizCommand} & The Graphviz layouter to use. \\
+\haddockdecltt{->} & \haddockdecltt{GraphvizOutput} & The output format. \\
+\haddockdecltt{->} & \haddockdecltt{FilePath} & The FilePath to use for the generated image. \\
+\haddockdecltt{->} & \haddockdecltt{GraphType} & The graph to render. \\
+\haddockdecltt{->} & \haddockdecltt{ParamsType} & The graph parameters to use. \\
+\haddockdecltt{->} & \haddockdecltt{IO FilePath} & The FilePath used for the generated image. \\
+\end{tabulary}\par
+Generates an image from a graph and writes this to a file in the specified
+   format using the specified Graphviz layouter.\par
+
+\end{haddockdesc}

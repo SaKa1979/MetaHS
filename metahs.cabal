@@ -1,20 +1,20 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.1.
+-- This file has been generated from package.yaml by hpack version 0.31.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6964da8c692b553b41cbf7cac4cc8dd1cbc5c8b179856ce8ead0b1f7c8d1ea0a
+-- hash: b52ced47f30a3dd95ce933c5d1e0bd04f468cef30b54f2f8a7df24df615adb42
 
 name:           metahs
-version:        0.1.0.0
+version:        0.0.1
 description:    Please see the README on bitbucket at https://bitbucket.org/SaKa1979/metahs/src/master/README
 homepage:       https://github.com/https://SaKa1979@bitbucket.org/SaKa1979/metahs#readme
 bug-reports:    https://github.com/https://SaKa1979@bitbucket.org/SaKa1979/metahs/issues
 author:         Henrie Vos, Sander Kamps
 maintainer:     sanderkamps79@gmail.com
-copyright:      2018 Sander Kamps
-license:        BSD3
+copyright:      2019 Sander Kamps
+license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:

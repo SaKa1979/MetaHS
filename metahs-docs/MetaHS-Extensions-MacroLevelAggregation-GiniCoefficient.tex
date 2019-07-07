@@ -1,0 +1,24 @@
+\haddockmoduleheading{MetaHS.Extensions.MacroLevelAggregation.GiniCoefficient}
+\label{module:MetaHS.Extensions.MacroLevelAggregation.GiniCoefficient}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.Extensions.MacroLevelAggregation.GiniCoefficient (
+    giniCoefficient
+  ) where\end{verbatim}}
+\haddockendheader
+
+Calculates the Gini-coefficient of the metric population corresponding
+to supplied Relation Key. Result is a value bounded by {\char 91}0,1{\char 93}.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+giniCoefficient
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{RelationKey} & The MetaModel Relation Key (E.g., LCOM). \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The MetaModel Containing the associated key. \\
+\haddockdecltt{->} & \haddockdecltt{Double} & The Gini coefficient \\
+\end{tabulary}\par
+Calculate the Gini-coefficient of the metric values associated with the supplied metric Relation key\par
+
+\end{haddockdesc}

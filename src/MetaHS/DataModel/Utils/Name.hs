@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Name
 Description : Utility functions for the MetaHS data model layer.
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Name utility functions for the MetaHS data model layer.
 -}
 module MetaHS.DataModel.Utils.Name
@@ -16,14 +16,13 @@ module MetaHS.DataModel.Utils.Name
 import Data.List (intercalate, isSuffixOf, elemIndex)
 import Data.List.Split (splitOn)
 
--- Qualify identifier
-makeQualifiedId :: String  -- ^ The qualifier String (e.g. "MetaHS.DataModel.Extractor.Module.Source").
-   -> String  -- ^ The local identifier String (e.g. "qn").
-   -> String  -- ^ The resulting qualified String (e.g. "MetaHS.DataModel.Extractor.Module.Source.qn").
+-- | Qualify identifier
+makeQualifiedId :: String   -- ^ The qualifier String (e.g. "MetaHS.DataModel.Extractor.Module.Source").
+   -> String                -- ^ The local identifier String (e.g. "qn").
+   -> String                -- ^ The resulting qualified String (e.g. "MetaHS.DataModel.Extractor.Module.Source.qn").
 makeQualifiedId a b = a ++ "." ++ b
 
-
--- | Splits an indentifier in the qualifier and name parts.
+-- | Splits an identifier in the qualifier and name parts.
 split :: String           -- ^ The qualified String to split.
       -> (String, String) -- ^ The qualified and name parts.
 split qualName
@@ -41,8 +40,6 @@ split qualName
         Nothing -> ("","")
     dotParts      = splitOn "." qualName                                        -- dotParts = splitted parts of qualName
     unqualified   = 1 == length dotParts                                        -- unqualified is True is qualName does not contain dots
-
-
 
 -- | Determines whether a given qualified name is local to the given qualifier.
 isLocal :: String -- ^ The qualifier.

@@ -1,0 +1,135 @@
+\haddockmoduleheading{MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Decl}
+\label{module:MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Decl}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Decl (
+    srcSpanInfo, 
+    DataConstructor(DataConstructor, valueConstructors, dataConstructorName), 
+    ValueConstructor(ValueConstructor,
+                     valueConstructorFields,
+                     valueConstructorTypes,
+                     valueConstructorName), 
+    Field(Field, fieldTypes, fieldNames),  dataConstructor,  patternName, 
+    functionName,  typeSigName,  typeClassName,  instanceName,  inlineSigName
+  ) where\end{verbatim}}
+\haddockendheader
+
+Utility functions for Decl objects.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+srcSpanInfo\ ::\ Decl\ SrcSpanInfo\ ->\ SrcSpanInfo
+\end{tabular}]\haddockbegindoc
+Returns the SrcSpanInfo object associated with the Decl object.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+data\ DataConstructor
+\end{tabular}]\haddockbegindoc
+Represents the (simplified) information for a data constructor.\par
+
+\enspace \emph{Constructors}\par
+\haddockbeginconstrs
+\haddockdecltt{=} & \haddockdecltt{DataConstructor} & \\
+                                                      & \haddocktt{\qquad \{} \haddockdecltt{dataConstructorName :: String} & The name of the data constructor. \\
+                                                      & \haddocktt{\qquad ,} \haddockdecltt{valueConstructors :: [ValueConstructor]} & The value constructors for this data constructor. \\ & \haddocktt{\qquad \}} \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+instance\ Show\ DataConstructor
+\end{tabular}]
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+data\ ValueConstructor
+\end{tabular}]\haddockbegindoc
+Represents the information for a value constructor.\par
+
+\enspace \emph{Constructors}\par
+\haddockbeginconstrs
+\haddockdecltt{=} & \haddockdecltt{ValueConstructor} & \\
+                                                       & \haddocktt{\qquad \{} \haddockdecltt{valueConstructorName :: String} & The name of the value constructor. \\
+                                                       & \haddocktt{\qquad ,} \haddockdecltt{valueConstructorTypes :: [Type SrcSpanInfo]} & Contains the types used by this value constructor if this is not
+   defined using record notation.
+   For GADT data type declarations, this field will contain the final
+   type irrespective of whether record notation is used for the
+   preceeding types. \\
+                                                       & \haddocktt{\qquad ,} \haddockdecltt{valueConstructorFields :: [Field]} & In case the value constructor is defined using record notation,
+   this field will contain the fields used by this value constructor. \\ & \haddocktt{\qquad \}} \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+instance\ Show\ ValueConstructor
+\end{tabular}]
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+data\ Field
+\end{tabular}]\haddockbegindoc
+Represents a record field of a value constructor.\par
+
+\enspace \emph{Constructors}\par
+\haddockbeginconstrs
+\haddockdecltt{=} & \haddockdecltt{Field} & \\
+                                            & \haddocktt{\qquad \{} \haddockdecltt{fieldNames :: [String]} & The name(s) for this field. \\
+                                            & \haddocktt{\qquad ,} \haddockdecltt{fieldTypes :: Type SrcSpanInfo} & The types used by this field. \\ & \haddocktt{\qquad \}} \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+instance\ Show\ Field
+\end{tabular}]
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+dataConstructor\ ::\ Decl\ SrcSpanInfo\ ->\ Maybe\ DataConstructor
+\end{tabular}]\haddockbegindoc
+Converts a Decl to a DataConstructor object if possible (DataDecl or
+   GDataDecl).\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+patternName\ ::\ Decl\ SrcSpanInfo\ ->\ Maybe\ String
+\end{tabular}]\haddockbegindoc
+Returns the name of the PatBind if possible.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+functionName\ ::\ Decl\ SrcSpanInfo\ ->\ Maybe\ String
+\end{tabular}]\haddockbegindoc
+Returns the name of the FunBind if possible.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+typeSigName\ ::\ Decl\ SrcSpanInfo\ ->\ Maybe\ String
+\end{tabular}]\haddockbegindoc
+Returns the name of the TypeSig if possible.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+typeClassName\ ::\ Decl\ SrcSpanInfo\ ->\ Maybe\ String
+\end{tabular}]\haddockbegindoc
+Returns the name of the typeClass if possible.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+instanceName\ ::\ Decl\ SrcSpanInfo\ ->\ Maybe\ String
+\end{tabular}]\haddockbegindoc
+Returns the name of the Instance (as "\url{type-class} \url{data-type}") if possible.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+inlineSigName\ ::\ Decl\ SrcSpanInfo\ ->\ Maybe\ String
+\end{tabular}]\haddockbegindoc
+Returns the name of the InlineSig if possible.\par
+
+\end{haddockdesc}

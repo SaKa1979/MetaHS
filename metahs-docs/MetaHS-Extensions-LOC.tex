@@ -1,0 +1,32 @@
+\haddockmoduleheading{MetaHS.Extensions.LOC}
+\label{module:MetaHS.Extensions.LOC}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.Extensions.LOC (
+    keyLoc,  locAggregator
+  ) where\end{verbatim}}
+\haddockendheader
+
+Metamodel Elements that are interesting (those that occupy distinct line numbers) are :
+ModuleHead, ModuleImport, TypeSynonym, DataType, Function, TypeSignature,
+TypeClass and Instance. All other Elements that are part of the {\char '137}contains relations are ignored.\par
+LOC - Sum of all non-empty, non-comment lines in a module.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+keyLoc\ ::\ RelationKey
+\end{tabular}]\haddockbegindoc
+MetaModel key used for the LOC relation.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+locAggregator
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The supplied meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The complemented meta-model. \\
+\end{tabulary}\par
+LOC aggregator that adds the LOC metric relation to the supplied meta-model.\par
+
+\end{haddockdesc}

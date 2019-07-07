@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">{-|
+Module      : MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name
+Description : Utility functions for Name objects.
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
+Stability   : experimental
+Utility functions for Name objects.
+-}</span><span>
+</span><a name="line-10"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name</span><span>
+</span><a name="line-11"></a><span>    </span><span class="hs-keyword">where</span><span>
+</span><a name="line-12"></a><span>
+</span><a name="line-13"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">Language.Haskell.Exts.Syntax</span><span>
+</span><a name="line-14"></a><span>
+</span><a name="line-15"></a><span class="hs-comment">-- | Returns the name for a Name object.</span><span>
+</span><a name="line-16"></a><span class="hs-identifier">name</span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-identifier hs-type">Name</span><span> </span><a href="#local-6989586621679074329"><span class="hs-identifier hs-type">l</span></a><span>  </span><span class="hs-comment">-- ^ The Name object to analyze.</span><span>
+</span><a name="line-17"></a><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-identifier hs-type">String</span><span>  </span><span class="hs-comment">-- ^ The name of the Name object.</span><span>
+</span><a name="line-18"></a><a name="name"><a href="MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name.html#name"><span class="hs-identifier">name</span></a></a><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-var">Ident</span><span> </span><span class="hs-identifier">_</span><span> </span><a name="local-6989586621679074330"><a href="#local-6989586621679074330"><span class="hs-identifier">x</span></a></a><span class="hs-special">)</span><span>  </span><span class="hs-glyph">=</span><span> </span><a href="#local-6989586621679074330"><span class="hs-identifier hs-var">x</span></a><span>
+</span><a name="line-19"></a><span class="hs-identifier">name</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-var">Symbol</span><span> </span><span class="hs-identifier">_</span><span> </span><a name="local-6989586621679074331"><a href="#local-6989586621679074331"><span class="hs-identifier">x</span></a></a><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-string">&quot;(&quot;</span><span> </span><span class="hs-operator hs-var">++</span><span> </span><a href="#local-6989586621679074331"><span class="hs-identifier hs-var">x</span></a><span> </span><span class="hs-operator hs-var">++</span><span> </span><span class="hs-string">&quot;)&quot;</span></pre></body></html>

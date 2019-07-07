@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.EDSL.Graph.Types
 Description : The MetaHS EDSL Graph types
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 MetaHS EDSL Graph types
 -}
 module MetaHS.EDSL.Graph.Types

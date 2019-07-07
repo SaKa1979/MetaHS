@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Find
 Description : Generic SYB functions for finding certain nodes
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Generic SYB functions for finding certain nodes
 -}
 module MetaHS.DataModel.Utils.Find
@@ -24,7 +24,6 @@ import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.QName
     as QName
 
-
 -- | SYB function that searches for TyCon nodes and returns their names.
 findTyConNames :: Data a => a -- ^ The data structure to search.
                -> [String]    -- ^ The names of the TyCon nodes found.
@@ -35,7 +34,6 @@ findTyConNames = everything (++) ([] `mkQ` f)
         Just s -> [s]
         Nothing -> []
     f _ = []
-
 
 -- | SYB function that searches for QName nodes (without TyCons) and returns
 --   their names.
@@ -50,7 +48,6 @@ findQNames d = qnames \\ tyconNames
         Just a -> [a]
         Nothing -> []
 
-
 -- | SYB function that searches for Pat nodes that represent variables and
 --   returns their names.
 findPatVars :: Data a => a -- ^ The data structure to search.
@@ -61,7 +58,6 @@ findPatVars = everything (++) ([] `mkQ` f)
     f (PVar _ x)     = [Name.name x]
     f (PAsPat _ x _) = [Name.name x]
     f _              = []
-
 
 -- | SYB function that searches for functions and returns their names.
 findFunctionNames :: Data a => a -- ^ The data structure to search.

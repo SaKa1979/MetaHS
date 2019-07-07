@@ -1,0 +1,239 @@
+\haddockmoduleheading{MetaHS.EDSL.MetaModel}
+\label{module:MetaHS.EDSL.MetaModel}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.EDSL.MetaModel (
+    generateMetaModel,  writeMetaModel,  readMetaModel,  writeMetaModelPretty, 
+    pretty,  numberOfItems,  getPrograms,  getModules,  programContains, 
+    moduleContains,  moduleImports,  elementContains,  elementImports, 
+    elementSource,  elementUses,  getRelation,  setRelation,  domain,  range, 
+    RelationKey
+  ) where\end{verbatim}}
+\haddockendheader
+
+MetaHS EDSL MetaModel part\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+generateMetaModel
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The program name. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The program path. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The parse error output path. \\
+\haddockdecltt{->} & \haddockdecltt{IO MetaModel} & The resulting meta-model. \\
+\end{tabulary}\par
+Generates a meta-model.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+writeMetaModel
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model to write. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The path of the file to write. \\
+\haddockdecltt{->} & \haddockdecltt{IO ()} & No result. \\
+\end{tabulary}\par
+Write a meta-model to a file.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+readMetaModel
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The path of the file to read. \\
+\haddockdecltt{->} & \haddockdecltt{IO MetaModel} & The meta-model read. \\
+\end{tabulary}\par
+Read a meta-model from a file.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+writeMetaModelPretty
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model to write. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The path of the file to write. \\
+\haddockdecltt{->} & \haddockdecltt{IO ()} & No result. \\
+\end{tabulary}\par
+Write a meta-model to a file.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+pretty
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model to pretty print. \\
+\haddockdecltt{->} & \haddockdecltt{Doc} & The resulting Doc. \\
+\end{tabulary}\par
+Returns a pretty printed representation of the meta-model.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+numberOfItems
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Int} & The number of relation items in the meta-model. \\
+\end{tabulary}\par
+Returns the number of relation items in the meta-model.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+getPrograms
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The metamodel. \\
+\haddockdecltt{->} & \haddockdecltt{[Element]} & The Programs contained in the metamodel. \\
+\end{tabulary}\par
+Returns a list of Programs contained in the metamodel.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+getModules
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The metamodel. \\
+\haddockdecltt{->} & \haddockdecltt{[Element]} & The Modules contained by the specified Program. \\
+\end{tabulary}\par
+Returns a list of Modules contained in the metamodel.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+programContains
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The specified Program. \\
+\haddockdecltt{->} & \haddockdecltt{[Element]} & The Elements contained by the specified Program. \\
+\end{tabulary}\par
+Returns a list of Elements contained by the specified Program.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+moduleContains
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The specified Module. \\
+\haddockdecltt{->} & \haddockdecltt{[Element]} & The Elements contained by the specified Module. \\
+\end{tabulary}\par
+Returns a list of Elements contained by the specified Module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+moduleImports
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The specified Module. \\
+\haddockdecltt{->} & \haddockdecltt{[Element]} & The Elements contained by the specified Module. \\
+\end{tabulary}\par
+Returns a list of Elements imported by the specified Module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+elementContains
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The specified Element. \\
+\haddockdecltt{->} & \haddockdecltt{[Element]} & The Elements contained by the specified Element. \\
+\end{tabulary}\par
+Returns a list of Elements contained by the specified Element.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+elementImports
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The specified Element. \\
+\haddockdecltt{->} & \haddockdecltt{[Element]} & The Elements contained by the specified Element. \\
+\end{tabulary}\par
+Returns a list of Elements imported by the specified Element.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+elementSource
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The specified Element. \\
+\haddockdecltt{->} & \haddockdecltt{Maybe Element} & The source location for the specified Element. \\
+\end{tabulary}\par
+Returns a the source location for the specified Element.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+elementUses
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The specified Element. \\
+\haddockdecltt{->} & \haddockdecltt{[Element]} & The Elements used by the specified Element. \\
+\end{tabulary}\par
+Returns a list of Elements used by the specified Element.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+getRelation
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The metamodel key string. \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The metamodel. \\
+\haddockdecltt{->} & \haddockdecltt{Relation} & The corresponding Relation or an empty set. \\
+\end{tabulary}\par
+Returns the relation corresponding to the supplied key or an empty Set.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+setRelation
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The metamodel key string. \\
+\haddockdecltt{->} & \haddockdecltt{Relation} & The Relation to add. \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The metamodel. \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The resulting metamodel. \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+domain
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The metamodel key string. \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The metamodel. \\
+\haddockdecltt{->} & \haddockdecltt{Set Element} & Set of Elements that form the domain of the binary relation. \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+range
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The metamodel key string. \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The metamodel. \\
+\haddockdecltt{->} & \haddockdecltt{Set Element} & Set of Elements that form the range of the binary relation. \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+type\ RelationKey\ =\ String
+\end{tabular}]
+\end{haddockdesc}

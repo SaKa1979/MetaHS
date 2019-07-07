@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Language.Haskell.Exts.SrcLoc
 Description : Utility functions for SrcLoc and related objects.
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Utility functions for SrcLoc and related objects.
 -}
 module MetaHS.DataModel.Utils.Language.Haskell.Exts.SrcLoc

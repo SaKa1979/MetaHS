@@ -1,0 +1,23 @@
+\haddockmoduleheading{MetaHS.Extensions.MacroLevelAggregation.Distribution}
+\label{module:MetaHS.Extensions.MacroLevelAggregation.Distribution}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.Extensions.MacroLevelAggregation.Distribution (
+    distribution
+  ) where\end{verbatim}}
+\haddockendheader
+
+Calculates the distribution of the metric values corresponding to supplied Relation Key.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+distribution
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{RelationKey} & The MetaModel Relation Key (E.g., LCOM). \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The MetaModel Containing the associated key. \\
+\haddockdecltt{->} & \haddockdecltt{Set (Int, Int)} & The set containing tuple(s) (Frequency, MetricValue) \\
+\end{tabulary}\par
+Calculates the distribution of the metric values corresponding to supplied Relation Key.\par
+
+\end{haddockdesc}

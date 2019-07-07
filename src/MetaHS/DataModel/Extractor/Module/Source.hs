@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Extractor.Module.Source
 Description : The MetaHS extractor for source relations
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 MetaHS extractor for module level source relations
 -}
 module MetaHS.DataModel.Extractor.Module.Source
@@ -38,8 +38,8 @@ source m = case Module.name m of
   Nothing -> empty
 
 -- | Creates a Module "m",Location "ml" pair for the whole module
-locationModule :: String                                -- ^ The module (head) name.
-               -> Module SrcSpanInfo                    -- ^ The Declaration with var l.
+locationModule :: String                                  -- ^ The module (head) name.
+               -> Module SrcSpanInfo                      -- ^ The Declaration with var l.
                -> [(MetaModel.Element,MetaModel.Element)] -- ^ list of (Module "mn",Location) pairs
 locationModule mn (Module l _ _ _ _) = [(m,ml)]
   where m =  MetaModel.Module mn

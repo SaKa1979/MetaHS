@@ -1,0 +1,23 @@
+\haddockmoduleheading{MetaHS.DataModel.Extractor.Module.Source}
+\label{module:MetaHS.DataModel.Extractor.Module.Source}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Extractor.Module.Source (
+    source
+  ) where\end{verbatim}}
+\haddockendheader
+
+MetaHS extractor for module level source relations\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+source
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Module SrcSpanInfo} & The Module to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{Relation} & The resulting MetaModel.Relation items. \\
+\end{tabulary}\par
+Creates Location relations for all supported top-level declarations in the
+ provided Module.\par
+
+\end{haddockdesc}

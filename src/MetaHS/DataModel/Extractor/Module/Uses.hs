@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Extractor.Module.Uses
 Description : The MetaHS extractor for uses relations
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 MetaHS extractor for module level uses relations
 -}
 module MetaHS.DataModel.Extractor.Module.Uses
@@ -25,7 +25,6 @@ import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Name
     as Name
 import qualified MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.DeclHead
     as DeclHead
-
 
 -- | Create MetaModel.Contains relations for top-level declarations of a module.
 uses :: Module SrcSpanInfo  -- ^ The module to analyze
@@ -50,7 +49,6 @@ usesDecl mn pb@PatBind{} nrms  = usesPattern mn pb nrms
 usesDecl mn fb@FunBind{} nrms   = usesFunction mn fb nrms
 usesDecl _ _ _ = []
 
-
 -- | Analyzes a type synonym declaration for `Uses` information.
 usesType :: String                                  -- ^ The name of the Module.
          -> Decl SrcSpanInfo                        -- ^ The type synonym declaration to analyze.
@@ -64,7 +62,6 @@ usesType mn d nrms = case d of
         rs = [(p,c) | c <- es]                                                  -- p = parent, c = child, rs = relations
     _ -> []
 
-
 -- | Analyzes a type signature for `Uses` information.
 usesTypeSig :: String                                   -- ^ The name of the Module.
             -> Decl SrcSpanInfo                         -- ^ The type signature to analyze.
@@ -77,7 +74,6 @@ usesTypeSig _ d nrms = case d of
         es = [resolveType tcns nrms | tcns <- findTyConNames t]                 -- es = elements, tcns = TyCon names
         rs = [(p,c) | p <- ps, c <- es]                                         -- p = parent, c = child, rs = relations
     _ -> []
-
 
 -- | Analyzes a data declaration for `Uses` information.
 usesData :: String                                  -- ^ The name of the Module.
@@ -123,7 +119,6 @@ usesData mn d nrms = case Decl.dataConstructor d of
             fts = Decl.fieldTypes f                                             -- fts = field Types
     Nothing -> []
 
-
 -- | Analyzes a PatBind declaration for `Uses` information.
 usesPattern :: String                                   -- ^ The name of the Module.
             -> Decl SrcSpanInfo                         -- ^ The function declaration to analyze.
@@ -142,7 +137,6 @@ usesPattern mn pb@(PatBind _ (PVar _ _) rhs wheres) nrms = trs ++ vrs
     trs = [(p,resolveType c nrms) | c <- tycons]                                -- trs = types relations
     vrs = [(p,resolveValue c nrms) | c <- exts]                                 -- trs = values relations
 usesPattern _ _ _ = []
-
 
 -- | Analyzes a PatBind declaration for `Uses` information.
 usesFunction :: String                                  -- ^ The name of the Module.

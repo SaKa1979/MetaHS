@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Module
 Description : Utility functions for Modules objects.
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Utility functions for Modules objects.
 -}
 module MetaHS.DataModel.Utils.Language.Haskell.Exts.Syntax.Module
@@ -62,8 +62,8 @@ exports m = f $ headExports <$> head m
     f = fromMaybe Nothing
 
 -- | Returns the ExportSpecList as list
-getModuleExports :: Module l                 -- ^ The Module to analyze.
-                 -> [ExportSpec l]           -- ^ The ExportSpecList for this Module.
+getModuleExports :: Module l       -- ^ The Module to analyze.
+                 -> [ExportSpec l] -- ^ The ExportSpecList for this Module.
 getModuleExports m = case exports m of
   (Just (ExportSpecList _ es)) -> es
   Nothing -> []
@@ -88,4 +88,3 @@ declarations :: Module l  -- ^ The Module to analyze.
 declarations (Module _ _ _ _ x)            = x
 declarations (XmlHybrid _ _ _ _ x _ _ _ _) = x
 declarations _                             = []
-

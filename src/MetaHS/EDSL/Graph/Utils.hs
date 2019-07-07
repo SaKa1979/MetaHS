@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.EDSL.Graph.Utils
 Description : Utilities for handling graphs
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Utilities for handling graphs
 -}
 module MetaHS.EDSL.Graph.Utils
@@ -19,7 +19,6 @@ import Data.GraphViz
 import Data.GraphViz.Printing (renderDot)
 import MetaHS.EDSL.Graph.Types
 
-
 -- | Generates an image from a graph and writes this to a file in the specified
 --   format using the specified Graphviz layouter.
 graphToImage :: GraphvizCommand -- ^ The Graphviz layouter to use.
@@ -31,13 +30,11 @@ graphToImage :: GraphvizCommand -- ^ The Graphviz layouter to use.
 graphToImage cmd outp path graph params =
     writeImage cmd outp path $ graphToDotGraph graph params
 
-
 -- | Converts a graph and parameters to a DotGraph Node.
 graphToDotGraph :: GraphType      -- ^ The graph to convert.
                 -> ParamsType     -- ^ The graph parameters to use.
                 -> DotGraph Node  -- ^ The resulting DotGraph Node.
 graphToDotGraph graph params = adjustStrict $ graphToDot params graph
-
 
 -- | Generates an image from a DotGraph Node and writes this to a file in the
 --   specified format using the specified Graphviz layouter.
@@ -57,7 +54,6 @@ writeImage cmd outp path dg = do
     where
       dg' :: DotGraph Text
       dg' = parseDotGraph . renderDot . toDot $ adjustStrict dg
-
 
 -- | Adjusts the DOT strict setting for a DotGraph Node. This option will be
 --   enabled if the graph is undirected.

@@ -1,8 +1,9 @@
 {-|
 Module      : MetaHS.Extensions.MacroLevelAggregation.Utils
 Description : Utility functions for accessing the metric information in the MetaModel
-License     : <to-be-determined>
-Maintainer  : sanderkamps79@gmail.com
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
 -}
 module MetaHS.Extensions.MacroLevelAggregation.Utils

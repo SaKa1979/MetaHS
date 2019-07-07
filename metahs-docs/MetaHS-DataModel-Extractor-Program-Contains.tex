@@ -1,0 +1,24 @@
+\haddockmoduleheading{MetaHS.DataModel.Extractor.Program.Contains}
+\label{module:MetaHS.DataModel.Extractor.Program.Contains}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Extractor.Program.Contains (
+    contains
+  ) where\end{verbatim}}
+\haddockendheader
+
+MetaHS extractor for application level contains relations\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+contains
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The program name. \\
+\haddockdecltt{->} & \haddockdecltt{[Module SrcSpanInfo]} & List of parsed Modules. \\
+\haddockdecltt{->} & \haddockdecltt{Relation} & The resulting relation. \\
+\end{tabulary}\par
+Creates MetaModel.Relation set for the modules contained within the
+ program.\par
+
+\end{haddockdesc}

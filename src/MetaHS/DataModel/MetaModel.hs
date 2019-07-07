@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.MetaModel
 Description : The MetaHS metamodel
-License     : <to be determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 MetaHS metamodel
 -}
 
@@ -171,7 +171,7 @@ instance Pretty MetaModel where
             metaModelMap = getMetaModelImpl metaModel
 
             f :: String -> Doc
-            f key =                                                             -- function f iterates through the keys
+            f key = -- function f iterates through the keys
                 text "  " <> text (show key) <> char ':' $$
                 g ( fromMaybe Set.empty $ Map.lookup key metaModelMap)
 
@@ -184,7 +184,6 @@ instance Pretty MetaModel where
                     vcat . map (docLine "    ") $ Set.elems relation
                 where
                     docLine prefix v = text prefix <> pPrint v
-
 
 -- | Returns the provided String as a quoted Doc
 qt :: String -> Doc

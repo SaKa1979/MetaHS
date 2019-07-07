@@ -1,0 +1,54 @@
+\haddockmoduleheading{MetaHS.EDSL.Graph.UsesGraph}
+\label{module:MetaHS.EDSL.Graph.UsesGraph}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.EDSL.Graph.UsesGraph (
+    internalUses,  internalUsesGraph,  internalUsesParams
+  ) where\end{verbatim}}
+\haddockendheader
+
+Generates a Uses graph for a module\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+internalUses
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The module. \\
+\haddockdecltt{->} & \haddockdecltt{Directed} & This option will determine whether the resulting graph is directed or undirected. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The prefix for the links in the generated SVG images to the correct HTML editor for displaying the source code. Should probably become a hard link if a web server is used. \\
+\haddockdecltt{->} & \haddockdecltt{(GraphType, ParamsType)} & The generated Graph. \\
+\end{tabulary}\par
+Generates the internal uses graph for the specified module and returns
+   the associated default GraphvizParams.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+internalUsesGraph
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The module. \\
+\haddockdecltt{->} & \haddockdecltt{Directed} & This option will determine whether the resulting graph is directed or undirected. \\
+\haddockdecltt{->} & \haddockdecltt{GraphType} & The generated Graph. \\
+\end{tabulary}\par
+Generates the internal uses graph for the specified module.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+internalUsesParams
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The module. \\
+\haddockdecltt{->} & \haddockdecltt{Directed} & This option will determine whether the resulting graph is directed or undirected. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The prefix for the links in the generated SVG images to the correct HTML editor for display the source code. Should probably become a hard link if a web server is used. \\
+\haddockdecltt{->} & \haddockdecltt{ParamsType} & The generated Graph. \\
+\end{tabulary}\par
+Generates the default GraphvizParams for the internal uses graph for the
+   specified module.\par
+
+\end{haddockdesc}

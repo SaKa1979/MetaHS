@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.Extensions.LOC
 Description : The MetaHS EDSL LOC aggregation
-License     : <to-be-determined>
-Maintainer  : sanderkamps79@gmail.com
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Metamodel Elements that are interesting (those that occupy distinct line numbers) are :
 ModuleHead, ModuleImport, TypeSynonym, DataType, Function, TypeSignature,
 TypeClass and Instance. All other Elements that are part of the _contains relations are ignored.
@@ -26,8 +26,8 @@ keyLoc = "LOC"
 
 calcLoc ::
      MetaModel-- ^ The meta-model.
-  -> Element -- ^ Module
-  -> Int -- ^ The calculated LCOM metric value.
+  -> Element  -- ^ Module
+  -> Int      -- ^ The calculated LCOM metric value.
 calcLoc mm mod = sum ls
   where
     ls = [extractLines x | x <- es]

@@ -1,0 +1,46 @@
+\haddockmoduleheading{MetaHS.EDSL.Utils}
+\label{module:MetaHS.EDSL.Utils}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.EDSL.Utils (
+    split,  isLocal,  locationToQuery
+  ) where\end{verbatim}}
+\haddockendheader
+
+MetaHS EDSL Utils part\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+split
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The qualified String to split. \\
+\haddockdecltt{->} & \haddockdecltt{(String, String)} & The qualified and name parts. \\
+\end{tabulary}\par
+Splits an identifier in the qualifier and name parts.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+isLocal
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The qualifier. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The qualified name. \\
+\haddockdecltt{->} & \haddockdecltt{Bool} & True if the qualified name is local to the qualifier. \\
+\end{tabulary}\par
+Determines whether a given qualified name is local to the given qualifier.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+locationToQuery
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{Element} & The Location Element. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The resulting URL query String or an empty String. \\
+\end{tabulary}\par
+Converts a Location Element to a query String suitable for URLs.
+   An empty String is returned if the Element is not a Location Element.\par
+
+\end{haddockdesc}

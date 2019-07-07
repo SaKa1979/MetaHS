@@ -1,3 +1,12 @@
+{-|
+Module      : MetaHS.MacroLevelAggregation
+Description : The MetaHS Macro-level aggregation method: median
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
+Stability   : experimental
+Calculates the median of the metric values corresponding to supplied Relation Key.
+-}
 module MetaHS.Extensions.MacroLevelAggregation.Median
   (median)
 where

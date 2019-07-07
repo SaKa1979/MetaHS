@@ -1,3 +1,12 @@
+{-|
+Module      : MetaHS.MacroLevelAggregation
+Description : The MetaHS Macro-level aggregation method: average
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
+Stability   : experimental
+Calculates the average of the metric values corresponding to supplied Relation Key.
+-}
 module MetaHS.Extensions.MacroLevelAggregation.Average
     where
 

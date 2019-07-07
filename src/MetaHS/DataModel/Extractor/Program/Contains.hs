@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Extractor.Program.Contains
 Description : The MetaHS extractor for contains relations
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 MetaHS extractor for application level contains relations
 -}
 module MetaHS.DataModel.Extractor.Program.Contains

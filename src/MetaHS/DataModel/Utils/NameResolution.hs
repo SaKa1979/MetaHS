@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Utils.NameResolution
 Description : The MetaHS extractor for uses relations
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 NameResolution functions
 -}
 module MetaHS.DataModel.Utils.NameResolution
@@ -21,13 +21,11 @@ import qualified Data.Map as Map
 import qualified MetaHS.DataModel.MetaModel as MetaModel
 import MetaHS.DataModel.Utils.Name
 
-
 -- | A NameResolutionMap is a Data.Map that map from plain identifiers to resolved MetaModel.Element (e.g. "sum" -> Function "M.N.sum").
 type NameResolutionMap = Map.Map String MetaModel.Element
 
 -- |  The NameResolutionMaps. The first Data.Map is applicable to types; the second Data.Map is applicable to values.
 type NameResolutionMaps = (NameResolutionMap, NameResolutionMap)
-
 
 -- | Creates the NameResolution Data.Map instances.
 createNameResolutionMaps :: String              -- ^ Module name.
@@ -55,7 +53,6 @@ createNameResolutionMaps mn r = foldr f empty fcrs
                 value = mmf
         f _ nrms = nrms
 
-
 -- | Resolves a simple type name to the corresponding qualified Element.
 --   The simple type name will be qualified with "?" and wrapped in an
 --   MetaModel.UnknownType Element  if the mapping is not known by the
@@ -79,7 +76,6 @@ resolveValue s nrms = fromMaybe unknown lookupResult
   where
     lookupResult = Map.lookup s $ snd nrms                                      -- lookupResult = result from the lookup in the value NameResolutionMap
     unknown = MetaModel.Function $ makeQualifiedId "?" s                        -- unknown = Function object in case lookupResult == Nothing
-
 
 -- | Returns True if the Relation is of the form (Module "mn",Element)
 --   where mn is the provided Module name.

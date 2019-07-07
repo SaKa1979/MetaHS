@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.EDSL.Graph.UsesGraph
 Description : Generates a Uses graph for a module
-License     : <to be determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 Generates a Uses graph for a module
 -}
 module MetaHS.EDSL.Graph.UsesGraph
@@ -24,7 +24,7 @@ import MetaHS.EDSL.MetaModel
 import MetaHS.EDSL.Graph.Types
 import MetaHS.EDSL.Utils
 
--- | Generates the internal uses graph for the specificed module and returns
+-- | Generates the internal uses graph for the specified module and returns
 --   the associated default GraphvizParams.
 internalUses :: MetaModel               -- ^ The meta-model.
              -> Element                 -- ^ The module.
@@ -35,7 +35,6 @@ internalUses metaModel moduleElement directed editorLink = (graph,params)
   where
     graph = internalUsesGraph metaModel moduleElement directed
     params = internalUsesParams metaModel moduleElement directed editorLink
-
 
 -- | Generates the internal uses graph for the specified module.
 internalUsesGraph :: MetaModel  -- ^ The meta-model.
@@ -66,7 +65,6 @@ internalUsesGraph metaModel moduleElement directed = graph
                 Undirected -> [(x, y, pack ""), (y, x, pack "")]                -- undirected graphs require A -> B AND B -> A in order to come to A -- B
             ia = elemIndex a elements
             ib = elemIndex b elements
-
 
 -- | Generates the default GraphvizParams for the internal uses graph for the
 --   specified module.

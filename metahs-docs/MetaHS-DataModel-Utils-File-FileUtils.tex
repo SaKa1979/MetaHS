@@ -1,0 +1,35 @@
+\haddockmoduleheading{MetaHS.DataModel.Utils.File.FileUtils}
+\label{module:MetaHS.DataModel.Utils.File.FileUtils}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Utils.File.FileUtils (
+    filesInHierarchy,  modulesInHierarchy
+  ) where\end{verbatim}}
+\haddockendheader
+
+Utility functions for files and directories.\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+filesInHierarchy
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{FilePath} & The directory hierarchy to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{IO [FilePath]} & The files found in the directory hierarchy. \\
+\end{tabulary}\par
+Flattens the hierarchy of a directory to a list of files.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+modulesInHierarchy
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{FilePath} & The directory hierarchy to analyze. \\
+\haddockdecltt{->} & \haddockdecltt{IO ([Module SrcSpanInfo], [ParseResult (Module SrcSpanInfo)])} & The successfully and unsuccessfully  parsed Module . \\
+\end{tabulary}\par
+Attempts to extract modules for each file in the directory hierarchy
+   The returned tuple contains the successfully extracted modules and the
+   ParseResult information for those files where this extraction failed.\par
+
+\end{haddockdesc}

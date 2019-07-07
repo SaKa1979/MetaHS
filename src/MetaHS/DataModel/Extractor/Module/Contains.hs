@@ -1,10 +1,10 @@
 {-|
 Module      : MetaHS.DataModel.Extractor.Module.Contains
 Description : The MetaHS extractor for contains relations
-License     : <to-be-determined>
-Maintainer  : hhrf.vos@studie.ou.nl
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
 Stability   : experimental
-
 MetaHS extractor for module level contains relations
 -}
 module MetaHS.DataModel.Extractor.Module.Contains
@@ -78,7 +78,6 @@ containsDecl mn tc@ClassDecl{} = containsTypeClass mn tc
 containsDecl mn id@InstDecl{} = containsInstance mn id
 containsDecl mn id@InlineSig{} = containsInlineSig mn id
 containsDecl _ _ = []
-
 
 -- | Creates a list of (Module "mn",TypeSynonym "tsn") pairs for a top-level
 -- type (TypeDecl) declarations.

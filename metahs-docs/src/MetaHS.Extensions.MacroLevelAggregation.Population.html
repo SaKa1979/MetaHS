@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">{-|
+Module      : MetaHS.MacroLevelAggregation
+Description : The MetaHS Macro-level aggregation method: population
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
+Stability   : experimental
+Calculates the metric population corresponding to supplied Relation Key.
+-}</span><span>
+</span><a name="line-10"></a><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">MetaHS.Extensions.MacroLevelAggregation.Population</span><span>
+</span><a name="line-11"></a><span>    </span><span class="hs-keyword">where</span><span>
+</span><a name="line-12"></a><span>
+</span><a name="line-13"></a><span class="hs-keyword">import</span><span> </span><a href="MetaHS.Extensions.MacroLevelAggregation.Utils.html"><span class="hs-identifier">MetaHS.Extensions.MacroLevelAggregation.Utils</span></a><span>
+</span><a name="line-14"></a><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><a href="MetaHS.DataModel.MetaModel.html"><span class="hs-identifier">MetaHS.DataModel.MetaModel</span></a><span> </span><span class="hs-keyword">as</span><span> </span><span class="hs-identifier">MetaModel</span><span>
+</span><a name="line-15"></a><span class="hs-keyword">import</span><span> </span><a href="MetaHS.EDSL.MetaModel.html"><span class="hs-identifier">MetaHS.EDSL.MetaModel</span></a><span>
+</span><a name="line-16"></a><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">Data.List</span><span> </span><span class="hs-special">(</span><span class="hs-identifier hs-var">sort</span><span class="hs-special">)</span><span>
+</span><a name="line-17"></a><span>
+</span><a name="line-18"></a><span class="hs-comment">-- | Calculates the metric population corresponding to supplied Relation Key.</span><span>
+</span><a name="line-19"></a><span class="hs-identifier">population</span><span> </span><span class="hs-glyph">::</span><span> </span><a href="MetaHS.EDSL.MetaModel.html#RelationKey"><span class="hs-identifier hs-type">RelationKey</span></a><span>          </span><span class="hs-comment">-- ^ The MetaModel Relation Key (E.g., LCOM).</span><span>
+</span><a name="line-20"></a><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><a href="MetaHS.DataModel.MetaModel.html#MetaModel"><span class="hs-identifier hs-type">MetaModel.MetaModel</span></a><span>  </span><span class="hs-comment">-- ^ The MetaModel Containing the associated key.</span><span>
+</span><a name="line-21"></a><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="hs-identifier hs-type">Int</span><span class="hs-special">]</span><span>                </span><span class="hs-comment">-- ^ The set containing the MetricValues</span><span>
+</span><a name="line-22"></a><a name="population"><a href="MetaHS.Extensions.MacroLevelAggregation.Population.html#population"><span class="hs-identifier">population</span></a></a><span> </span><a name="local-6989586621679135404"><a href="#local-6989586621679135404"><span class="hs-identifier">key</span></a></a><span> </span><a name="local-6989586621679135405"><a href="#local-6989586621679135405"><span class="hs-identifier">mm</span></a></a><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-identifier hs-var">sort</span><span> </span><span class="hs-operator hs-var">$</span><span> </span><a href="MetaHS.Extensions.MacroLevelAggregation.Utils.html#getMetricElements"><span class="hs-identifier hs-var">getMetricElements</span></a><span> </span><a href="#local-6989586621679135404"><span class="hs-identifier hs-var">key</span></a><span> </span><a href="#local-6989586621679135405"><span class="hs-identifier hs-var">mm</span></a></pre></body></html>

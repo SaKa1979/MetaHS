@@ -1,0 +1,67 @@
+\haddockmoduleheading{MetaHS.DataModel.Utils.NameResolution}
+\label{module:MetaHS.DataModel.Utils.NameResolution}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Utils.NameResolution (
+    NameResolutionMap,  NameResolutionMaps,  createNameResolutionMaps, 
+    resolveType,  resolveValue
+  ) where\end{verbatim}}
+\haddockendheader
+
+NameResolution functions\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+type\ NameResolutionMap\ =\ Map\ String\ Element
+\end{tabular}]\haddockbegindoc
+A NameResolutionMap is a Data.Map that map from plain identifiers to resolved MetaModel.Element (e.g. "sum" -> Function "M.N.sum").\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+type\ NameResolutionMaps\ =\ (NameResolutionMap,\ NameResolutionMap)
+\end{tabular}]\haddockbegindoc
+The NameResolutionMaps. The first Data.Map is applicable to types; the second Data.Map is applicable to values.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+createNameResolutionMaps
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & Module name. \\
+\haddockdecltt{->} & \haddockdecltt{Relation} & The "Module mn \haddocktt{Contains} Element" Relations. \\
+\haddockdecltt{->} & \haddockdecltt{NameResolutionMaps} & The resulting NameResolutionMaps. \\
+\end{tabulary}\par
+Creates the NameResolution Data.Map instances.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+resolveType
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The simple value name. \\
+\haddockdecltt{->} & \haddockdecltt{NameResolutionMaps} & The NameResolutionMaps. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The corresponding Element. \\
+\end{tabulary}\par
+Resolves a simple type name to the corresponding qualified Element.
+   The simple type name will be qualified with "?" and wrapped in an
+   MetaModel.UnknownType Element  if the mapping is not known by the
+   provided NameResolutionMaps.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+resolveValue
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{String} & The simple value name. \\
+\haddockdecltt{->} & \haddockdecltt{NameResolutionMaps} & The NameResolutionMaps. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The corresponding Element. \\
+\end{tabulary}\par
+Resolves a simple value name to the corresponding qualified Element.
+   The simple value name will be qualified with "?" if the mapping is not
+   known by the provided NameResolutionMaps.\par
+
+\end{haddockdesc}

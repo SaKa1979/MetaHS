@@ -1,0 +1,60 @@
+\haddockmoduleheading{MetaHS.Extensions.LCOM}
+\label{module:MetaHS.Extensions.LCOM}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.Extensions.LCOM (
+    lcom,  lcomGraph,  keyLcom,  lcomAggregator
+  ) where\end{verbatim}}
+\haddockendheader
+
+Metamodel Elements that are interesting (those that are used to determine nodes in
+MetaHS.EDSL.Graph.UsesGraph module ) are : TypeSynonym, DataType, Function.
+All other Elements that are  part of the {\char '137}contains relations are ignored.\par
+LCOM4 - Number of connected components in the graph that represents each method as a node and the sharing of at least
+        one attribute/method as an edge.
+        ref. Hitz and Montazeri (1995)\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+lcom
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The Module Element. \\
+\haddockdecltt{->} & \haddockdecltt{Int} & The calculated LCOM metric value. \\
+\end{tabulary}\par
+Calculates the LCOM metric value for a specified module name.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+lcomGraph
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{MetaModel} & The meta-model. \\
+\haddockdecltt{->} & \haddockdecltt{Element} & The Module Element. \\
+\haddockdecltt{->} & \haddockdecltt{Directed} & Create a directed or undirected graph. \\
+\haddockdecltt{->} & \haddockdecltt{String} & The prefix for the links in the generated SVG images to the correct HTML editor for display the source code. Should probably become a hard link if a web server is used. \\
+\haddockdecltt{->} & \haddockdecltt{(Int, GraphType, ParamsType)} & The calculated LCOM metric value and the generated Graph and default parameters. \\
+\end{tabulary}\par
+Generates the internalUsesGraph for the specified Module Element and
+ calculates the corresponding LCOM metric value.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+keyLcom\ ::\ RelationKey
+\end{tabular}]\haddockbegindoc
+MetaModel key used for the LCOM relation.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+lcomAggregator\ ::\ MetaModel\ ->\ MetaModel
+\end{tabular}]\haddockbegindoc
+LCOM aggregator that adds the LCOM relation to the metamodel.
+ key = keyLcom
+ value = (p,c) where p is a Module Element and c is an IntValue Element that
+ contains the LCOM value for the module.\par
+
+\end{haddockdesc}

@@ -1,0 +1,21 @@
+\haddockmoduleheading{MetaHS.Extensions.MacroLevelAggregation.Utils}
+\label{module:MetaHS.Extensions.MacroLevelAggregation.Utils}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.Extensions.MacroLevelAggregation.Utils (
+    getMetricElements
+  ) where\end{verbatim}}
+\haddockendheader
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+getMetricElements
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & \haddockdecltt{RelationKey} & The MetaModel Relation Key (E.g., LCOM). \\
+\haddockdecltt{->} & \haddockdecltt{MetaModel} & The MetaModel Containing the associated key. \\
+\haddockdecltt{->} & \haddockdecltt{[Int]} & The list containing all (sane) values associated with the supplied key. \\
+\end{tabulary}\par
+Extracts the metric values from the Relation associated with supplied key\par
+
+\end{haddockdesc}

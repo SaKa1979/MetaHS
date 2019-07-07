@@ -1,3 +1,12 @@
+{-|
+Module      : MetaHS.EDSL
+Description : The MetaHS EDSL
+Copyright   : Copyright (C) 2017-2019 H.H.R.F. Vos, S. Kamps
+License     : MIT
+Maintainer  : hhrf.vos@studie.ou.nl, sanderkamps79@gmail.com
+Stability   : experimental
+MetaHS EDSL
+-}
 module Spec where
   import Test.HUnit
 
@@ -14,7 +23,7 @@ module Spec where
   import qualified Data.Map.Strict as Map
 
   -- | Creates a dummy metamodel for one kind of key with Int values. E.g., LCOM
-  createTestMm :: [Int]         -- ^ List with Int values whicj shall be used for the Element value.
+  createTestMm :: [Int]       -- ^ List with Int values which shall be used for the Element value.
                -> RelationKey -- ^ Relation key to be simulated.
                -> MetaModel   -- ^ Dummy metamodel to run function under test on.
   createTestMm xs key = MetaModel msr

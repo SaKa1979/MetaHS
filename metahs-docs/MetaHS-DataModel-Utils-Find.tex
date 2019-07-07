@@ -1,0 +1,61 @@
+\haddockmoduleheading{MetaHS.DataModel.Utils.Find}
+\label{module:MetaHS.DataModel.Utils.Find}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.Utils.Find (
+    findTyConNames,  findQNames,  findPatVars,  findFunctionNames
+  ) where\end{verbatim}}
+\haddockendheader
+
+Generic SYB functions for finding certain nodes\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+findTyConNames
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & Data a \\
+\haddockdecltt{=>} & \haddockdecltt{a} & The data structure to search. \\
+\haddockdecltt{->} & \haddockdecltt{[String]} & The names of the TyCon nodes found. \\
+\end{tabulary}\par
+SYB function that searches for TyCon nodes and returns their names.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+findQNames
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & Data a \\
+\haddockdecltt{=>} & \haddockdecltt{a} & The data structure to search. \\
+\haddockdecltt{->} & \haddockdecltt{[String]} & The names of the QNames nodes found. \\
+\end{tabulary}\par
+SYB function that searches for QName nodes (without TyCons) and returns
+   their names.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+findPatVars
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & Data a \\
+\haddockdecltt{=>} & \haddockdecltt{a} & The data structure to search. \\
+\haddockdecltt{->} & \haddockdecltt{[String]} & The names of the Pat variables found. \\
+\end{tabulary}\par
+SYB function that searches for Pat nodes that represent variables and
+   returns their names.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+findFunctionNames
+\end{tabular}]\haddockbegindoc
+\haddockbeginargs
+\haddockdecltt{::} & Data a \\
+\haddockdecltt{=>} & \haddockdecltt{a} & The data structure to search. \\
+\haddockdecltt{->} & \haddockdecltt{[String]} & The function names found. \\
+\end{tabulary}\par
+SYB function that searches for functions and returns their names.\par
+
+\end{haddockdesc}

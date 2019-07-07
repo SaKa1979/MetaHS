@@ -1,0 +1,37 @@
+\haddockmoduleheading{MetaHS.EDSL.Graph.Types}
+\label{module:MetaHS.EDSL.Graph.Types}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.EDSL.Graph.Types (
+    GraphType,  ParamsType,  Directed(Directed, Undirected)
+  ) where\end{verbatim}}
+\haddockendheader
+
+MetaHS EDSL Graph types\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+type\ GraphType\ =\ Gr\ Element\ Text
+\end{tabular}]\haddockbegindoc
+Type synonym for generated LCOM graph.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+type\ ParamsType\ =\ GraphvizParams\ Node\ Element\ Text\ ()\ Element
+\end{tabular}]\haddockbegindoc
+Type synonym for generated GraphvizParams.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+data\ Directed
+\end{tabular}]\haddockbegindoc
+Determines whether the graph should be directed or undirected.\par
+
+\enspace \emph{Constructors}\par
+\haddockbeginconstrs
+\haddockdecltt{=} & \haddockdecltt{Directed} & \\
+\haddockdecltt{|} & \haddockdecltt{Undirected} & \\
+\end{tabulary}\par
+\end{haddockdesc}

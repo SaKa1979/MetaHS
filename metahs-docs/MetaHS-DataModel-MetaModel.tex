@@ -1,0 +1,137 @@
+\haddockmoduleheading{MetaHS.DataModel.MetaModel}
+\label{module:MetaHS.DataModel.MetaModel}
+\haddockbeginheader
+{\haddockverb\begin{verbatim}
+module MetaHS.DataModel.MetaModel (
+    Element(Module,
+            Location,
+            DataType,
+            ModuleHead,
+            Pragma,
+            Program,
+            ModuleImport,
+            ModuleExport,
+            Function,
+            TypeSynonym,
+            TypeSignature,
+            TypeClass,
+            Instance,
+            UnknownType,
+            StringValue,
+            IntValue,
+            stringValue,
+            name,
+            locationPath,
+            locationStartLine,
+            locationStartColumn,
+            locationEndLine,
+            locationEndColumn,
+            intValue), 
+    Pair,  Relation,  MetaModel(MetaModel, getMetaModelImpl),  pPrint
+  ) where\end{verbatim}}
+\haddockendheader
+
+MetaHS metamodel\par
+
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+data\ Element
+\end{tabular}]\haddockbegindoc
+The various elements that can be used in the metamodel.\par
+
+\enspace \emph{Constructors}\par
+\haddockbeginconstrs
+\haddockdecltt{=} & \haddockdecltt{Program} & Top level program \\
+                                              & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{Module} & Represents a module \\
+                                             & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{ModuleHead} & Represents a module head \\
+                                                 & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{ModuleImport} & Represents a module import \\
+                                                   & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{ModuleExport} & Represents a module export \\
+                                                   & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{Function} & Represents a function \\
+                                               & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{DataType} & Represents a datatype declaration. \\
+                                               & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{TypeSynonym} & Represents a type synonym. \\
+                                                  & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{TypeSignature} & Represents a type signature. \\
+                                                    & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{TypeClass} & Represents a type instance. \\
+                                                & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{Instance} & \\
+                                               & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{Pragma} & Represents an inline Pragma. \\
+                                             & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{UnknownType} & Represents a type which is unknown. \\
+                                                  & \haddocktt{\qquad \{} \haddockdecltt{name :: !String} & The name of the program. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{Location} & Represents a source code location. \\
+                                               & \haddocktt{\qquad \{} \haddockdecltt{locationPath :: !String} & The path to the file containing the source code. \\
+                                               & \haddocktt{\qquad ,} \haddockdecltt{locationStartLine :: !Int} & The start line. \\
+                                               & \haddocktt{\qquad ,} \haddockdecltt{locationStartColumn :: !Int} & The start column. \\
+                                               & \haddocktt{\qquad ,} \haddockdecltt{locationEndLine :: !Int} & The end line. \\
+                                               & \haddocktt{\qquad ,} \haddockdecltt{locationEndColumn :: !Int} & The end column. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{StringValue} & Contains a generic String value. \\
+                                                  & \haddocktt{\qquad \{} \haddockdecltt{stringValue :: !String} & The String value. \\ & \haddocktt{\qquad \}} \\
+\haddockdecltt{|} & \haddockdecltt{IntValue} & Contains a generic Int value. \\
+                                               & \haddocktt{\qquad \{} \haddockdecltt{intValue :: !Int} & The Int value. \\ & \haddocktt{\qquad \}} \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+instance\ Eq\ Element\\instance\ Ord\ Element\\instance\ Read\ Element\\instance\ Show\ Element
+\end{tabular}]
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+instance\ Pretty\ Element
+\end{tabular}]\haddockbegindoc
+Pretty print instance for Elements.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+type\ Pair\ =\ (Element,\ Element)
+\end{tabular}]\haddockbegindoc
+A Pair is defined as a tuple of Elements\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+type\ Relation\ =\ Set\ (Element,\ Element)
+\end{tabular}]\haddockbegindoc
+A relation is defined as a set of Pair types.
+   E.g., {\char '137}contains, {\char '137}source, {\char '137}uses, LCOM\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+newtype\ MetaModel
+\end{tabular}]\haddockbegindoc
+The MetaModel type.\par
+
+\enspace \emph{Constructors}\par
+\haddockbeginconstrs
+\haddockdecltt{=} & \haddockdecltt{MetaModel} & \\
+                                                & \haddocktt{\qquad \{} \haddockdecltt{getMetaModelImpl :: MetaModelImpl} & \\ & \haddocktt{\qquad \}} \\
+\end{tabulary}\par
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+instance\ Read\ MetaModel\\instance\ Show\ MetaModel
+\end{tabular}]
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[\begin{tabular}{@{}l}
+instance\ Pretty\ MetaModel
+\end{tabular}]\haddockbegindoc
+Pretty print instance for the MetaModel.\par
+
+\end{haddockdesc}
+\begin{haddockdesc}
+\item[
+pPrint\ ::\ Pretty\ a\ =>\ a\ ->\ Doc
+]
+\end{haddockdesc}
